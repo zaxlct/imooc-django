@@ -13,7 +13,7 @@ class Course(models.Model):
     desc = models.CharField(max_length=300, verbose_name=u'课程描述')
     # TextField 不限制输入长度
     detail = models.TextField(verbose_name=u'课程详情')
-    degree = models.CharField(choices=(('cj', u'初级'), ('zj', u'中级'), ('gj', u'高级')), max_length=2)
+    degree = models.CharField(choices=(('cj', u'初级'), ('zj', u'中级'), ('gj', u'高级')), max_length=2, verbose_name=u'难度')
     learn_times = models.IntegerField(default=0, verbose_name=u'学习时长(分钟数)')
     students = models.IntegerField(default=0, verbose_name=u'学习人数')
     fav_nums = models.IntegerField(default=0, verbose_name=u'收藏人数')
@@ -24,6 +24,9 @@ class Course(models.Model):
     class Meta:
         verbose_name = u'课程'
         verbose_name_plural = verbose_name
+
+    def __unicode__(self):
+        return self.name
 
 
 # 章节信息
@@ -39,7 +42,7 @@ class Lesson(models.Model):
 
 
 class Video(models.Model):
-    course = models.ForeignKey(Lesson, verbose_name=u'章节')
+    lesson = models.ForeignKey(Lesson, verbose_name=u'章节')
     name = models.CharField(max_length=100, verbose_name=u'视频名')
     add_time = models.DateTimeField(default=datetime.now, verbose_name=u'添加时间')
 
