@@ -1,0 +1,245 @@
+/* Main stylesheet for select plugin */
+.selectul{
+    position:relative;
+    display:inline-block;
+    cursor:pointer;
+    float:left;
+    margin-right:10px;
+}
+.selectul ul{
+    position:absolute;
+    left:0;
+    top:0px;
+    background:#fff;
+    border:1px solid #bdc3c7;
+    border-top:none;
+    padding:0px;
+    overflow:hidden;
+    overflow-y:auto;
+    display:none;
+    padding-top: 31px;
+    -webkit-box-shadow:1px 1px 2px #eee;
+    box-shadow:1px 1px 2px #eee;
+}
+.selectul ul li{
+    height:20px;
+    line-height:20px;
+    color:#6a7576;
+    font-size:12px;
+    padding:5px 10px;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+.selectul ul li:hover{
+    background:#666;
+    color:#fff;
+    cursor:pointer;
+}
+.selectul select{
+    display:none;
+}
+
+.selectfocus{
+    height:30px;
+    line-height:30px;
+    border:1px solid #d3dcdd;
+    background-color: #fff;
+    padding:0 0 0 8px;
+    position: relative;
+    z-index: 1002;
+}
+.selectfocus em{
+    height:30px;
+    display:block;
+    background:url(../images/select-arr-default.gif) no-repeat right 0;
+    font-style:normal;
+    color:#4b555b;
+    padding-right:8px;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+
+.select_ul_show .selectfocus{
+    /*border-color:#91c4e5;
+    border-bottom-color:#edf4f8;*/
+}
+.select_ul_show .selectfocus em{
+    background-position:right -28px;
+}
+
+/*时间样式*/
+.lq-datetimepick{
+    width: 500px;
+    /*height: 280px;*/
+    padding: 10px;
+    position: absolute;
+    /*left: 50%;
+    top: 50%;
+    margin: -160px 0 0 -260px;*/
+    border: 1px solid #d3dcdd;
+    background-color: #FFFFFF;
+    -webkit-box-shadow: 0 0 7px rgba(0,0,0,.2);
+    box-shadow: 0 0 7px rgba(0,0,0,.2);
+    display: none;z-index:999999;
+}
+.datetime-arr{
+    width: 13px;
+    height: 7px;
+    position: absolute;
+    left: 25px;
+    top: -7px;
+    background: url("../images/pop-tips-info-arr.gif") no-repeat 0 0;
+}
+.select-datetime{
+    width: 100%;
+    float: left;
+	height:auto;
+    *height: 222px;
+}
+.select-datetime dl{
+    height: 50px;
+}
+.select-datetime dl.datetime-day{
+    margin-bottom: 10px;
+}
+.select-datetime dl dt{
+    width: 100px;
+    height: 50px;
+    float: left;
+    text-align: center;
+    line-height: 18px;
+    text-align: center;
+    font-size: 12px;
+    color: #4b555b;
+}
+.select-datetime dl dt a{
+    display: block;
+    padding: 7px 0;
+}
+.select-datetime dl dt span{
+    display: block;
+    border-right: 1px solid #ecf0f1;
+    margin-right: -1px;
+}
+.select-datetime dl dt.last span{
+    border-right: none;
+}
+.select-datetime dl dt span i{
+    color: #f03368;
+    margin-left: 6px;
+}
+.select-datetime dl dt em{
+    display: block;
+    font-weight: normal;
+}
+/*.select-datetime dl dt a:hover,*/
+.select-datetime dl dt.current a{
+    background-color: #13a4e7;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: bold;
+}
+/*.select-datetime dl dt a:hover i,*/
+.select-datetime dl dt.current a i{
+    color: #FFFFFF;
+}
+.select-datetime dl dt a:hover{
+    text-decoration: none;
+}
+
+.select-datetime dl dd{
+    width: 99px;
+    height: 40px;
+    float: left;
+    background-color: #fff;
+    border: 1px solid #d3dcdd;
+    padding: 7px 0 6px;
+    margin: -1px 0 0 -1px;
+    line-height: 20px;
+    text-align: center;
+    color: #4b555b;
+    cursor: pointer;
+}
+.select-datetime dl dd em{
+    font-size: 12px;
+    display: block;
+}
+.select-datetime dl dd.over{
+    color: #95a5a6;
+    background-color: #ecf0f1;
+}
+.select-datetime dl dd.selected{
+    color: #ffffff;
+    background-color: #6b7879;
+}
+
+
+
+/*年份*/
+.datetime-select{
+    height: 32px;
+    clear: both;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #d3dcdd;
+}
+.datetime-select .selectul{
+    width: 100px;
+}
+
+/*日期*/
+.select-datetime dl.datetime-day{
+    height: 35px;
+}
+.select-datetime dl.datetime-day dt,
+.select-datetime dl.datetime-day dd{
+    width: 70px;
+    height: 30px;
+    line-height: 30px;
+}
+.select-datetime dl.datetime-day dt{
+    width: 71px;
+}
+.select-datetime dl.datetime-day dt span{
+    border-right: none;
+    font-size: 14px;
+    text-align: center;
+}
+
+.select-datetime dl dd.blank{
+    background-color: #fafbfb;
+}
+.select-datetime dl dd.current{
+    background-color: #f2f5f5;
+    font-weight: bold;
+}
+
+/*时分*/
+.select-datetime dl.datetime-hour dd{
+    width: 61px;
+    height: 30px;
+    line-height: 30px;
+}
+
+
+/**/
+.select-datetime dl.datetime-week{
+    height: 50px;
+}
+.select-datetime dl.datetime-week dt,
+.select-datetime dl.datetime-week dd{
+    width: 100px;
+    height: 50px;
+    line-height: 150%;
+}
+.select-datetime dl.datetime-week dt span{
+    border-right: 1px solid #ecf0f1;
+    font-size: 12px;
+    text-align: center;
+    margin-right: -1px;
+}
+.select-datetime dl dt.last span{
+    border-right: none;
+}
