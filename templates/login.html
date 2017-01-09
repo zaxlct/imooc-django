@@ -68,23 +68,22 @@
       </div>
       <div class="fl form-box">
         <h2>帐号登录</h2>
-        <form action="login.html" method="post" autocomplete="off">
+        <form action="/login/" method="post" autocomplete="off">
           <input type='hidden' name='csrfmiddlewaretoken' value='mymQDzHWl2REXIfPMg2mJaLqDfaS1sD5'/>
           <div class="form-group marb20 ">
-            <label>用&nbsp;户&nbsp;名</label>
-            <input name="username" id="account_l" type="text" placeholder="手机号/邮箱"/>
+            <input name="username" id="username" type="text" placeholder="手机号/邮箱"/>
           </div>
           <div class="form-group marb8 ">
-            <label>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</label>
             <input name="password" id="password_l" type="password" placeholder="请输入您的密码"/>
           </div>
-          <div class="error btns login-form-tips" id="jsLoginTips"></div>
+          <div class="error btns login-form-tips" id="jsLoginTips">{{ msg }}</div>
           <div class="auto-box marb38">
 
             <a class="fr" href="forgetpwd.html">忘记密码？</a>
           </div>
           <input class="btn btn-green" id="jsLoginBtn" type="submit" value="立即登录 > "/>
-          <input type='hidden' name='csrfmiddlewaretoken' value='5I2SlleZJOMUX9QbwYLUIAOshdrdpRcy'/>
+          <!--<input type='hidden' name='csrfmiddlewaretoken' value='5I2SlleZJOMUX9QbwYLUIAOshdrdpRcy'/> -->
+        {% csrf_token %}
         </form>
         <p class="form-p">没有慕学在线网帐号？<a href="register.html">[立即注册]</a></p>
       </div>
