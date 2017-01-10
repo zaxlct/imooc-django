@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'operation',
     'xadmin',
     'crispy_forms',
+    'captcha',
 ]
 AUTH_USER_MODEL = 'users.UserProfile'
 
@@ -138,7 +139,23 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
-# STATIC_ROOT = '/static/' #设置静态文件的根目录
+# STATIC_ROOT = '/static/' #设置静态文件的根目录，项目上线时配置
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+# QQ 邮箱发邮件 不稳定，发送太慢
+# EMAIL_HOST = 'smtp.exmail.qq.com'
+# EMAIL_PORT = 465
+# EMAIL_HOST_USER = '10581290@qq.com'
+# EMAIL_HOST_PASSWORD = 'uakjpbjousljbihf'
+# EMAIL_USE_TLS = False
+# EMAIL_FROM = '10581290@qq.com'
+
+# 新浪邮箱发邮件  很稳定
+EMAIL_HOST = "smtp.sina.com"
+EMAIL_PORT = 25
+EMAIL_HOST_USER = "anshengme@sina.com"
+EMAIL_HOST_PASSWORD = "ansheng.me"
+EMAIL_USE_TLS = False
+EMAIL_FROM = "anshengme@sina.com"
