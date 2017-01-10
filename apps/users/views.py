@@ -78,9 +78,11 @@ class RegisterView(View):
             return render(request, 'register.html', {'register_form': register_form})
 
 
+# 验证用户点击邮件里的注册连接
 class ActiveUserView(View):
     def get(self, request, active_code):
         all_records = EmailVerifyRecord.objects.filter(code=active_code)
+        # 如果用户存在
         if all_records:
             for records in all_records:
                 email = records.email
@@ -88,3 +90,5 @@ class ActiveUserView(View):
                 user.is_active = True
                 user.save()
             return render(request, 'login.html')
+        else:
+            return render(request, 'active_fail.html')
