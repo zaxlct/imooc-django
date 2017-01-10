@@ -54,18 +54,20 @@ class RegisterView(View):
     def post(self, request):
         register_form = RegisterForm(request.POST)
         if register_form.is_valid():
+            # 拿到的是邮箱
             user_name = request.POST.get('email', '')
+            if UserProfile.objects.filter(email=user_name):
+                return render(request, 'register.html', {'register_form': register_form, 'msg': '用户已经存在！'})
+
             pass_word = request.POST.get('password', '')
 
             user_profile = UserProfile()
+            # 邮箱也设置成了用户名，我觉得可以设置个随机的昵称
             user_profile.username = user_name
             user_profile.email = user_name
             user_profile.password = make_password(pass_word)
             # is_active 是 auth_user 表里预定义的字段
             user_profile.is_active = False
-            # 因为邮箱不能重复，用户注册后不能再次以同样的邮箱注册，否则会报错
-            # 要么提示用户已经注册过但未激活，要么设置验证码过期时间
-            # TODO 用户难道不能多次获取注册验证码吗？
             user_profile.save()
 
             # TODO 发送邮箱后提示用户
