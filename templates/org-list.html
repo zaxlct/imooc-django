@@ -45,7 +45,7 @@
           </div>
 
         <!-- 课程机构循环 -->
-        {% for course_org in all_orgs %}
+        {% for course_org in all_orgs.object_list %}
           <dl class="des difdes">
             <dt>
               <a href="org-detail-homepage.html">
@@ -80,12 +80,30 @@
         {% endfor %}
 
         </div>
+
+        <!-- 分页器 -->
         <div class="pageturn">
           <ul class="pagelist">
-            <li class="active"><a href="?page=1">1</a></li>
-            <li><a href="?page=2" class="page">2</a></li>
-            <li><a href="?page=3" class="page">3</a></li>
-            <li class="long"><a href="?page=2">下一页</a></li>
+            {% if all_orgs.has_previous %}
+            <li class="long">
+              <a href="?{{ all_orgs.previous_page_number.querystring }}" class="prev">上一页</a>
+            </li>
+            {% endif %}
+
+            {% for page in all_orgs.pages %}
+              {% if page %}
+                {% ifequal page all_orgs.number %}
+                  <li class="active"><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                {% else %}
+                  <li><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                {% endifequal %}
+              {% else %}
+                <li class="none"><a href="">...</a></li>
+              {% endif %}
+            {% endfor %}
+            {% if all_orgs.has_next %}
+              <li class="long"><a href="?{{ all_orgs.next_page_number.querystring }}">下一页</a></li>
+            {% endif %}
           </ul>
         </div>
       </div>
