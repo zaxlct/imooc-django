@@ -66,7 +66,7 @@
               <li>
                 <a href="teachers-list.html">授课教师</a>
               </li>
-              <li class="active"><a href="org-list.html">授课机构</a></li>
+              <li class="active"><a href="{% url 'org:org_list' %}">授课机构</a></li>
             </ul>
           </div>
         </div>
@@ -131,29 +131,5 @@
 <script src="{% static 'js/unslider.js' %}" type="text/javascript"></script>
 <script src="{% static 'js/plugins/jquery.scrollLoading.js'  %}" type="text/javascript"></script>
 <script src="{% static 'js/deco-common.js' %}" type="text/javascript"></script>
-
-<script>
-  $(function () {
-    $('#jsStayBtn').on('click', function () {
-      $.ajax({
-        cache: false,
-        type: "POST",
-        url: "/org/add_ask/",
-        data: $('#jsStayForm').serialize(),
-        async: true,
-        success: function (data) {
-          if (data.status == 'success') {
-            $('#jsStayForm')[0].reset();
-            alert("提交成功")
-          } else if (data.status == 'fail') {
-            $('#jsCompanyTips').html(data.msg)
-          }
-        },
-      });
-    });
-  })
-
-</script>
-
 </body>
 </html>
