@@ -127,6 +127,7 @@ class ResetView(View):
         return render(request, 'login.html')
 
 
+# POST 专门对应修改密码的 URL
 class ModifyPwdView(View):
     def post(self, request):
         modify_form = ModifyPwdForm(request.POST)
