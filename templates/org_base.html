@@ -26,8 +26,8 @@
           <div class="fl">
             <p>联系方式：<b>3333333333</b></p>
           </div>
-          <a style="color:white" class="fr registerbtn" href="register.html">注册</a>
-          <a style="color:white" class="fr loginbtn" href="login.html">登录</a>
+          <a style="color:white" class="fr registerbtn" href="{% url 'register' %}">注册</a>
+          <a style="color:white" class="fr loginbtn" href="{% url 'login' %}">登录</a>
         </div>
       </div>
 
@@ -61,7 +61,7 @@
   <div class="wp">
     <ul class="crumbs">
       <li><a href="index.html">首页</a>></li>
-      <li><a href="org-list.html">课程机构</a>></li>
+      <li><a href="{% url 'org:org_list' %}">课程机构</a>></li>
       <li>{% block page_path %}机构首页{% endblock %}</li>
     </ul>
   </div>
@@ -73,8 +73,8 @@
       <ul>
         <li class="{% ifequal current_page 'home' %}active2{% endifequal %}"><a href="{% url 'org:org_home' course_org.id %}">机构首页</a></li>
         <li class="{% ifequal current_page 'course' %}active2{% endifequal %}"><a href="{% url 'org:org_course' course_org.id %}">机构课程</a></li>
-        <li class="{% ifequal current_page 'desc' %}active2{% endifequal %}"><a href="org-detail-desc.html">机构介绍</a></li>
-        <li class="{% ifequal current_page 'teacher' %}active2{% endifequal %}"><a href="org-detail-teachers.html">机构讲师</a></li>
+        <li class="{% ifequal current_page 'desc' %}active2{% endifequal %}"><a href="{% url 'org:org_desc' course_org.id %}">机构介绍</a></li>
+        <li class="{% ifequal current_page 'teacher' %}active2{% endifequal %}"><a href="{% url 'org:org_teacher' course_org.id %}">机构讲师</a></li>
       </ul>
     </div>
 

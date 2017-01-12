@@ -4082,7 +4082,7 @@ footer .footer .line {
 }
 
 .personal_list .left li:last-child {
-    border: 0;
+    /*border: 0;*/
 }
 
 .personal_list .left li:hover, .personal_list .left .active2 {
