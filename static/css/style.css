@@ -2798,6 +2798,7 @@ footer .footer .line {
     height: 320px;
     margin: 3px;
     overflow: hidden;
+    box-sizing: border-box;
 }
 
 .list .group_list .box a {
