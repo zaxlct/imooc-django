@@ -51,7 +51,7 @@
                   收藏
                 {% endif %}
               </div>
-              <div class="buy btn"><a style="color: white" href="course-video.html">开始学习</a></div>
+              <div class="buy btn"><a style="color: white" href="{% url 'courses:course_info' course.id %}">开始学习</a></div>
             </div>
           </div>
           <div class="group-share-box">
