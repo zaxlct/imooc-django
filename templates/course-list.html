@@ -31,18 +31,18 @@
             <div class="group_list">
             {% for course in all_courses.object_list  %}
               <div class="box">
-                <a href="course-detail.html">
+                <a href="{% url 'courses:course_detail' course.id %}">
                   <img width="280" height="350" class="scrollLoading" src="{{ MEDIA_URL }}{{ course.image }}"/>
                 </a>
                 <div class="des">
-                  <a href="course-detail.html">
+                  <a href="{% url 'courses:course_detail' course.id %}">
                     <h2>{{ course.name }}</h2>
                   </a>
                   <span class="fl">时长：<i class="key">{{ course.learn_times }}</i></span>
                   <span class="fr">学习人数：{{ course.students }}&nbsp;&nbsp;</span>
                 </div>
                 <div class="bottom">
-                  <a href="course-detail.html"><span class="fl">来自{{ course.course_org.name }}</span></a>
+                  <a href="{% url 'courses:course_detail' course.id %}"><span class="fl">来自{{ course.course_org.name }}</span></a>
                   <span class="star fr  notlogin" data-favid="15">{{ course.fav_nums }}</span>
                 </div>
               </div>

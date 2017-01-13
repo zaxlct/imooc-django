@@ -10,7 +10,6 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'js/plugins/queryCity/css/cityLayout.css' %}">
-  {% block custom_js %}{% endblock %}
   <script src="{% static 'js/jquery.min.js' %}" type="text/javascript"></script>
   <script src="{% static 'js/jquery-migrate-1.2.1.min.js' %}" type="text/javascript"></script>
   {% block custom_css %}{% endblock %}
@@ -342,6 +341,6 @@
     });
   });
 </script>
-
+{% block custom_js %}{% endblock %}
 </body>
 </html>

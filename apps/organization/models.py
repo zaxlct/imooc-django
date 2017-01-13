@@ -43,6 +43,9 @@ class CourseOrg(models.Model):
     def __unicode__(self):
         return self.name
 
+    def get_teacher_nums(self):
+        # 获取课程机构的教师数量
+        return self.teacher_set.all().count()
 
 class Teacher(models.Model):
     # 一个机构对应多个老师 （实际存储的是 org_id）
