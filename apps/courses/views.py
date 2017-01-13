@@ -2,11 +2,12 @@
 from django.shortcuts import render
 from django.views.generic.base import View
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
-from operation.models import UserFavorite
+from operation.models import UserFavorite, CourseComments
+from django.http import HttpResponse
 
 from .models import Course, CourseResource
 
-
+import json
 # Create your views here.
 
 
@@ -83,3 +84,51 @@ class CourseInfoView(View):
             'course': course,
             'all_resources': all_resources,
         })
+
+
+class CommentView(View):
+    # 课程评论
+    def get(self, request, course_id):
+        course = Course.objects.get(id=int(course_id))
+        all_resources = CourseResource.objects.filter(course=course)
+        all_comments = CourseComments.objects.all()
+        return render(request, 'course-comment.html', {
+            'course': course,
+            'all_comments': all_comments,
+            'all_resources': all_resources,
+        })
+
+
+class AddCommentView(View):
+    # 用户添加课程评论
+    def post(self, request):
+        # 判断用户登录状态
+        if not request.user.is_authenticated():
+            res = {}
+            res['status'] = 'fail'
+            res['msg'] = u'用户未登录'
+            return HttpResponse(json.dumps(res), content_type='application/json')
+
+        course_id = request.POST.get('course_id', 0)
+        comments = request.POST.get('comments', '')
+
+        res = {}
+        if course_id > 0 and comments:
+            course_comments = CourseComments()
+            # get 和 filter 区别
+            # get 只能取出一条数据，如果取出多条或者为空，都会抛出异常
+            # filter 返回一个数组，不会抛出异常
+            course = Course.objects.get(id=int(course_id))
+
+            course_comments.course = course
+            course_comments.comments = comments
+            course_comments.user = request.user
+            course_comments.save()
+
+            res['status'] = 'success'
+            res['msg'] = u'添加成功'
+        else:
+            res['status'] = 'fail'
+            res['msg'] = u'添加失败'
+
+        return HttpResponse(json.dumps(res), content_type='application/json')

@@ -10,7 +10,6 @@
   <link rel="stylesheet" type="text/css" href="/static/css/mooc.css"/>
   <link rel="stylesheet" type="text/css" href="/static/css/muke/course/common-less.css">
 {% endblock %}
-![](http://ww1.sinaimg.cn/large/006tNbRwjw1fax12qry53j30a005zdgz.jpg)
 {% block custom_bread %}
     <section>
         <div class="wp">
@@ -59,8 +58,8 @@
         <div class="content">
           <div class="mod-tab-menu">
             <ul class="course-menu clearfix">
-              <li><a class="ui-tabs-active active" id="learnOn" href="course-video.html"><span>章节</span></a></li>
-              <li><a id="commentOn" class="" href="course-comment.html"><span>评论</span></a></li>
+              <li><a class="ui-tabs-active active" id="learnOn" href="{% url 'courses:course_info' course.id %}"><span>章节</span></a></li>
+              <li><a id="commentOn" class="" href="{% url 'courses:course_comment' course.id %}"><span>评论</span></a></li>
             </ul>
           </div>
           <div id="notice" class="clearfix">
