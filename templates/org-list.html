@@ -1,7 +1,18 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
-{% block title %}程序员之家—慕学在线网{% endblock %}
-<!-- 页面 body 内容 -->
+{% block title %}课程机构列表 - 慕学在线网{% endblock %}
+
+{% block custom_bread %}
+    <section>
+        <div class="wp">
+            <ul class="crumbs">
+                <li><a href="{% url 'index' %}">首页</a>></li>
+                <li>课程机构</li>
+            </ul>
+        </div>
+    </section>
+{% endblock %}
+
 {% block custom_content %}
 <section>
   <div class="wp butler_list_box list">
