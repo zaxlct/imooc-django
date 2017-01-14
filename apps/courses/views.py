@@ -2,10 +2,11 @@
 from django.shortcuts import render
 from django.views.generic.base import View
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
-from operation.models import UserFavorite, CourseComments
 from django.http import HttpResponse
 
 from .models import Course, CourseResource
+from operation.models import UserFavorite, CourseComments, UserCourse
+from utils.mixin_utils import LoginRequiredMixin
 
 import json
 # Create your views here.
@@ -75,18 +76,44 @@ class CourseDetailView(View):
         })
 
 
-class CourseInfoView(View):
+class CourseInfoView(LoginRequiredMixin, View):
     # 课程章节信息
     def get(self, request, course_id):
         course = Course.objects.get(id=int(course_id))
+
+        # 查询用户是否已经关联了该课程
+        user_courses = UserCourse.objects.filter(user=request.user, course=course)
+        if not user_courses:
+            user_course = UserCourse(user=request.user, course=course)
+            user_course.save()
+
+
+        # 取出 UserCourse 表里和这个课程一样的所有数据 data
+        user_courses = UserCourse.objects.filter(course=course)
+
+        # 取出 data 里所有用户的 user_ids 列表
+        user_ids = [user_course.user.id for user_course in user_courses]
+
+        # 取出 UserCourse 表里， 集合 user_ids 每个元素对应的数据
+        all_user_courses = UserCourse.objects.filter(user_id__in=user_ids)
+
+        # 取出 all_user_courses 里所有课程的 course_ids 列表
+        course_ids = [user_course.course.id for user_course in all_user_courses]
+
+        # 取出 Course 表里，集合 course_ids 每个元素对应的数据
+        # 需要画图才能理清楚
+        relate_courses = Course.objects.filter(id__in=course_ids)
+        relate_courses = relate_courses.order_by('-click_nums')[:5]
+
         all_resources = CourseResource.objects.filter(course=course)
         return render(request, 'course-video.html', {
             'course': course,
             'all_resources': all_resources,
+            'relate_courses': relate_courses,
         })
 
 
-class CommentView(View):
+class CommentView(LoginRequiredMixin, View):
     # 课程评论
     def get(self, request, course_id):
         course = Course.objects.get(id=int(course_id))
