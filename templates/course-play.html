@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}公开课视频信息 - 慕学在线网{% endblock %}
+{% block title %}{{ video.name }} - 慕学在线网{% endblock %}
 {% load staticfiles %}
 
 {% block custom_css %}
@@ -9,15 +9,27 @@
   <link rel="stylesheet" type="text/css" href="{%  static 'css/aui.css' %}"/>
   <link rel="stylesheet" type="text/css" href="{%  static 'css/mooc.css' %}"/>
   <link rel="stylesheet" type="text/css" href="{%  static 'css/muke/course/common-less.css' %}">
+  <link rel="stylesheet" type="text/css" href="{%  static 'css/video-js.min.css' %}">
+  <style>
+    .video-js .vjs-big-play-button {
+      top: 50%;
+      left: 50%;
+    }
+  </style>
 {% endblock %}
+
+{% block custom_js %}
+<script src="{% static 'js/video.min.js' %}" type="text/javascript"></script>
+{% endblock %}
+
 {% block custom_bread %}
     <section>
         <div class="wp">
             <ul class="crumbs">
                 <li><a href="{% url 'index' %}">首页</a>></li>
                 <li><a href="{% url 'courses:course_list' %}">公开课程</a> > </li>
-                <li><a href="{% url 'courses:course_detail' course.id %}">课程详情</a> > </li>
-                <li>章节信息</li>
+                <li><a href="{% url 'courses:course_detail' course.id %}">{{ course.name }}</a> > </li>
+                <li>{{ video.name }}</li>
             </ul>
         </div>
     </section>
@@ -25,32 +37,15 @@
 
 {% block custom_content %}
   <div id="main">
-  <div class="course-infos">
-    <div class="w pr">
-      <div style="height: 15px" class="path">
-      </div>
-      <div class="hd">
-        <h2 class="l">{{ course.name }}</h2>
-      </div>
-      <div class="statics clearfix">
-        <div class="static-item ">
-          <span class="meta-value"><strong>{{ course.get_degree_display }}</strong></span>
-          <span class="meta">难度</span>
-          <em></em>
-        </div>
-        <div class="static-item static-time">
-          <span class="meta-value">{{ course.learn_times }}分钟</span>
-          <span class="meta">时长</span>
-          <em></em>
-        </div>
-        <div class="static-item">
-          <span class="meta-value"><strong>{{ course.students }}</strong></span>
-          <span class="meta">学习人数</span>
-          <em></em>
-        </div>
-      </div>
-    </div>
+
+  <div style="width:950px;height:675px; margin-left: 340px">
+    <video id="example_video_1" class="video-js vjs-default-skin" controls preload="none" width="1200"
+           poster="http://video-js.zencoder.com/oceans-clip.png"
+           data-setup="{}">
+      <source src="{{ video.url }}" type='video/mp4'>
+    </video>
   </div>
+
   <div class="course-info-main clearfix w has-progress">
 
     <div class="info-bar clearfix">

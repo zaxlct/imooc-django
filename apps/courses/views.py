@@ -4,7 +4,7 @@ from django.views.generic.base import View
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse
 
-from .models import Course, CourseResource
+from .models import Course, CourseResource, Video
 from operation.models import UserFavorite, CourseComments, UserCourse
 from utils.mixin_utils import LoginRequiredMixin
 
@@ -159,3 +159,41 @@ class AddCommentView(View):
             res['msg'] = u'添加失败'
 
         return HttpResponse(json.dumps(res), content_type='application/json')
+
+
+class VideoPlayView(View):
+    # 播放视频页面
+    def get(self, request, video_id):
+        video = Video.objects.get(id=int(video_id))
+        course = video.lesson.course
+
+        # 查询用户是否已经关联了该课程
+        user_courses = UserCourse.objects.filter(user=request.user, course=course)
+        if not user_courses:
+            user_course = UserCourse(user=request.user, course=course)
+            user_course.save()
+
+        # 取出 UserCourse 表里和这个课程一样的所有数据 data
+        user_courses = UserCourse.objects.filter(course=course)
+
+        # 取出 data 里所有用户的 user_ids 列表
+        user_ids = [user_course.user.id for user_course in user_courses]
+
+        # 取出 UserCourse 表里， 集合 user_ids 每个元素对应的数据
+        all_user_courses = UserCourse.objects.filter(user_id__in=user_ids)
+
+        # 取出 all_user_courses 里所有课程的 course_ids 列表
+        course_ids = [user_course.course.id for user_course in all_user_courses]
+
+        # 取出 Course 表里，集合 course_ids 每个元素对应的数据
+        # 需要画图才能理清楚
+        relate_courses = Course.objects.filter(id__in=course_ids)
+        relate_courses = relate_courses.order_by('-click_nums')[:5]
+
+        all_resources = CourseResource.objects.filter(course=course)
+        return render(request, 'course-play.html', {
+            'course': course,
+            'all_resources': all_resources,
+            'relate_courses': relate_courses,
+            'video': video,
+        })
