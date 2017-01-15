@@ -29,7 +29,7 @@
         {% for teacher in all_teachers.object_list %}
         <dl class="des">
           <dt>
-            <a href="/org/teacher/detail/1/">
+            <a href="{% url 'org:teacher_detail' teacher.id %}">
               <div class="picpic">
                 <img width="100" height="100" class="scrollLoading" src="{{ MEDIA_URL }}{{ teacher.image }}"/>
               </div>
@@ -42,7 +42,7 @@
           </div>
           </dt>
           <dd>
-            <a href="/org/teacher/detail/1/">
+            <a href="{% url 'org:teacher_detail' teacher.id %}">
               <h1>{{ teacher.name }}<span class="key picbig">金牌讲师</span></h1>
             </a>
             <ul class="cont">
@@ -53,7 +53,7 @@
               <li>教学特点：<span>{{ teacher.points }}</span></li>
             </ul>
           </dd>
-          <a class="buy buyservice" href="/org/teacher/detail/1/"><br/>查看<br/>详情</a>
+          <a class="buy buyservice" href="{% url 'org:teacher_detail' teacher.id %}"><br/>查看<br/>详情</a>
         </dl>
         {% endfor %}
 
