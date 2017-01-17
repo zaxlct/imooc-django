@@ -3,7 +3,7 @@ __author__ = 'zaxlct'
 __date__ = '2017/1/17 下午3:15'
 
 from django.conf.urls import url, include
-from .views import UserInfoView, UploadImageView, UpdatePwdView, SendEmailCodeView, UpdateEmailView
+from .views import UserInfoView, UploadImageView, UpdatePwdView, SendEmailCodeView, UpdateEmailView, MyCourseView
 
 
 urlpatterns = [
@@ -21,4 +21,7 @@ urlpatterns = [
 
     # 修改邮箱时，验证邮箱和验证码
     url(r'^update_email/$', UpdateEmailView.as_view(), name='update_email'),
+
+    # 我的课程
+    url(r'^mycourse/$', MyCourseView.as_view(), name='mycourse'),
 ]

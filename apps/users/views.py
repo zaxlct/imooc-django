@@ -11,6 +11,7 @@ from .models import UserProfile, EmailVerifyRecord
 from .forms import LoginForm, RegisterForm, ForgetForm, ModifyPwdForm, UploadImageForm, UserInfoForm
 from utils.email_send import send_register_email
 from utils.mixin_utils import LoginRequiredMixin
+from operation.models import UserCourse
 
 import json
 
@@ -253,6 +254,11 @@ class UpdateEmailView(LoginRequiredMixin, View):
         return HttpResponse(json.dumps(res), content_type='application/json')
 
 
-
-
+# 我的课程
+class MyCourseView(LoginRequiredMixin, View):
+     def get(self, request):
+         user_courses = UserCourse.objects.filter(user=request.user)
+         return render(request, 'usercenter-mycourse.html', {
+             'user_courses': user_courses,
+         })
 
