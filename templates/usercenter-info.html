@@ -48,7 +48,7 @@
                 <i class="error-tips"></i>
               </li>
               <li>生&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日：
-                <input type="text" id="birth_day" name="birday" value="{{ request.user.birth_day }}" readonly="readonly"/>
+                <input type="text" id="birth_day" name="birday" value="{{ request.user.birday }}" readonly="readonly"/>
                 <i class="error-tips"></i>
               </li>
               <li>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：
@@ -70,7 +70,7 @@
                 <input type="button" id="jsEditUserBtn" value="保存">
               </li>
             </ul>
-            <input type='hidden' name='csrfmiddlewaretoken' value='799Y6iPeEDNSGvrTu3noBrO4MBLv6enY'/>
+            {% csrf_token %}
           </form>
         </div>
       </div>

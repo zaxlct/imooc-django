@@ -158,10 +158,10 @@ STATICFILES_DIRS = (
 # 新浪邮箱发邮件  很稳定
 EMAIL_HOST = "smtp.sina.com"
 EMAIL_PORT = 25
-EMAIL_HOST_USER = "anshengme@sina.com"
-EMAIL_HOST_PASSWORD = "ansheng.me"
+EMAIL_HOST_USER = "azaxlct@sina.com"
+EMAIL_HOST_PASSWORD = "zxc123456"
 EMAIL_USE_TLS = False
-EMAIL_FROM = "anshengme@sina.com"
+EMAIL_FROM = "azaxlct@sina.com"
 
 #上传设置
 MEDIA_URL = '/media/'
