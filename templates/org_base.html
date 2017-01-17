@@ -18,8 +18,7 @@
 <body>
 <section class="headerwrap headerwrap2">
   <header>
-    <div class="header2 header">
-
+    <div class=" header header2">
       <div class="top">
         <div class="wp">
           <div class="fl"><p>服务电话：<b>33333333</b></p></div>
@@ -27,19 +26,19 @@
           {% if request.user.is_authenticated %}
             <div class="personal">
               <dl class="user fr">
-                <dd>bobby<img class="down fr" src="/static/images/top_down.png"/></dd>
-                <dt><img width="20" height="20" src="/static/media/image/2016/12/default_big_14.png"/></dt>
+                <dd>{{ request.user.nick_name }}<img class="down fr" src="{% static 'images/top_down.png' %}"/></dd>
+                <dt><img width="20" height="20" src="{{ MEDIA_URL }}{{ request.user.image }}"/></dt>
               </dl>
               <div class="userdetail">
                 <dl>
-                  <dt><img width="80" height="80" src="/static/media/image/2016/12/default_big_14.png"/></dt>
+                  <dt><img width="80" height="80" src="{{ MEDIA_URL }}{{ request.user.image }}" /></dt>
                   <dd>
-                    <h2>django</h2>
-                    <p>bobby</p>
+                    <h2>{{ request.user.nick_name }}</h2>
+                    <p>{{ request.user.username }}</p>
                   </dd>
                 </dl>
                 <div class="btn">
-                  <a class="personcenter fl" href="usercenter-info.html">进入个人中心</a>
+                  <a class="personcenter fl" href="{% url 'users:user_info' %}">进入个人中心</a>
                   <a class="fr" href="/logout/">退出</a>
                 </div>
               </div>
@@ -52,33 +51,46 @@
         </div>
       </div>
 
-
-      <div class="middle companyheader">
+      <div class="middle">
         <div class="wp">
-          {# org-detail-home.html 能用 course_org 这个变量 ，因为 org-detail-home 继承了 org_base.html，故 org_base 也能用 这个变量  #}
-          <img class="fl" style="width: 112px;height: 103px" src="{{ MEDIA_URL }}{{ course_org.image}}"/>
-          <div class="head fl">
-            <h1>
-              慕课网
-              <img src="{% static 'images/authentication.png' %}"/>
-              <img src="{% static 'images/gold.png' %}"/>
-            </h1>
-            <p class="fl">
-              <span class="fl" style="margin-top:8px;color:#848484;">推荐指数： </span>
-              <span class="precision company-credit" data-star-scope="5.0"></span>
-              <span class="key">5.0</span>
-            </p>
+          <a href="index.html"><img class="fl" src="{% static 'images/logo.jpg' %}"/></a>
+          <div class="searchbox fr">
+            <div class="selectContainer fl">
+                            <span class="selectOption" id="jsSelectOption" data-value="course">
+                                公开课
+                            </span>
+              <ul class="selectMenu" id="jsSelectMenu">
+                <li data-value="course">公开课</li>
+                <li data-value="org">课程机构</li>
+                <li data-value="teacher">授课老师</li>
+              </ul>
+            </div>
+            <input id="search_keywords" class="fl" type="text" value="" placeholder="请输入搜索内容"/>
+            <img class="search_btn fr" id="jsSearchBtn" src="{% static 'images/search_btn.png' %}"/>
           </div>
-          <div class="btn fr collectionbtn  notlogin" data-favid="22" data-fav-type="1">
-            {% if has_fav%}
-              已收藏
-            {% else %}
-              收藏
-            {% endif %}
-          </div>
-
         </div>
       </div>
+
+
+      <nav>
+        <div class="nav">
+          <div class="wp">
+            <ul>
+              <li class="{% ifequal request.path '/' %}active{% endifequal %}"><a href="{% url 'index' %}">首页</a></li>
+              <li class="{% ifequal request.path|slice:'7' '/course' %}active{% endifequal %}">
+                <a href="{% url 'courses:course_list' %}">
+                  公开课<img class="hot" src="{% static 'images/nav_hot.png' %}">
+                </a>
+              </li>
+              <li class="{% ifequal request.path|slice:'17' '/org/teacher/list' %}active{% endifequal %}">
+                <a href="{% url 'org:teacher_list' %}">授课教师</a>
+              </li>
+              <li class="{% ifequal request.path|slice:'9' '/org/list' %}active{% endifequal %}"><a href="{% url 'org:org_list' %}">授课机构</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
     </div>
   </header>
 </section>

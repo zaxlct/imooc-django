@@ -5,10 +5,14 @@ from django.contrib.auth.backends import ModelBackend
 from django.db.models import Q
 from django.views.generic.base import View
 from django.contrib.auth.hashers import make_password
+from django.http import HttpResponse
 
 from .models import UserProfile, EmailVerifyRecord
-from .forms import LoginForm, RegisterForm, ForgetForm, ModifyPwdForm
+from .forms import LoginForm, RegisterForm, ForgetForm, ModifyPwdForm, UploadImageForm
 from utils.email_send import send_register_email
+from utils.mixin_utils import LoginRequiredMixin
+
+import json
 
 # Create your views here.
 
@@ -127,7 +131,7 @@ class ResetView(View):
         return render(request, 'login.html')
 
 
-# POST 专门对应修改密码的 URL
+# 未登录下，用户修改密码
 class ModifyPwdView(View):
     def post(self, request):
         modify_form = ModifyPwdForm(request.POST)
@@ -143,5 +147,60 @@ class ModifyPwdView(View):
             return render(request, 'login.html')
         else:
             return render(request, 'password_reset.html', {'email': email, 'modify_form': modify_form})
+
+
+# 用户个人信息展示
+class UserInfoView(LoginRequiredMixin, View):
+    def get(self, request):
+        return render(request, 'usercenter-info.html', {
+
+        })
+
+
+# 用户修改头像
+class UploadImageView(LoginRequiredMixin, View):
+    def post(self, request):
+        # image_form = UploadImageForm(request.POST, request.FILES)
+        # if image_form.is_valid():
+        #     image = image_form.cleaned_data['image']
+        #     request.user.image = image
+        #     request.user.save()
+
+        image_form = UploadImageForm(request.POST, request.FILES, instance=request.user)
+        res = {}
+        if image_form.is_valid():
+            image_form.save()
+            res['status'] = 'success'
+            res['msg'] = u'头像修改成功'
+        else:
+            res['status'] = 'fail'
+            res['msg'] = u'头像修改失败'
+        return HttpResponse(json.dumps(res), content_type='application/json')
+
+
+# 用户在个人中心修改密码
+class UpdatePwdView(View):
+    def post(self, request):
+        modify_form = ModifyPwdForm(request.POST)
+        res = {}
+
+        if modify_form.is_valid():
+            pwd1 = request.POST.get('password1', '')
+            pwd2 = request.POST.get('password2', '')
+            if pwd1 != pwd2:
+                res['status'] = 'fail'
+                res['msg'] = u'两次密码不一致'
+                return HttpResponse(json.dumps(res), content_type='application/json')
+
+            user = request.user
+            user.password = make_password(pwd2)
+            user.save()
+
+            res['status'] = 'success'
+            res['msg'] = u'密码修改成功'
+        else:
+            res = modify_form.errors
+
+        return HttpResponse(json.dumps(res), content_type='application/json')
 
 
