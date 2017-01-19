@@ -1,7 +1,6 @@
 {% extends 'org_base.html' %}
 {% load staticfiles %}
-{% block custom_title %}机构首页{% endblock %}
-{% block page_path %}机构首页{% endblock %}
+{% block custom_title %}{{ course_org.name }} - 机构首页{% endblock %}
 {% block right_form %}
 <div class="right companycenter layout grouping">
   <div class="head">
@@ -12,9 +11,9 @@
     <!-- 全部课程 -->
     {% for course in all_courses %}
     <div class="module1_5 box">
-      <a href="course-detail.html"><img width="214" src="{{ MEDIA_URL }}{{ course.image }}"/></a>
+      <a href="{% url 'courses:course_detail' course.id %}"><img width="214" src="{{ MEDIA_URL }}{{ course.image }}"/></a>
       <div class="des">
-        <a href="course-detail.html"><h2>{{ course.name }}</h2></a>
+        <a href="{% url 'courses:course_detail' course.id %}"><h2>{{ course.name }}</h2></a>
         <span class="fl">课时：<i class="key">{{ course.learn_times }}</i></span>
         <span class="fr">参加人数：{{ course.students }}</span>
       </div>

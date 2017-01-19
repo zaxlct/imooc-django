@@ -18,7 +18,8 @@
 <body>
 <section class="headerwrap headerwrap2">
   <header>
-    <div class=" header header2">
+    <div class="header2 header">
+
       <div class="top">
         <div class="wp">
           <div class="fl"><p>服务电话：<b>33333333</b></p></div>
@@ -51,49 +52,37 @@
         </div>
       </div>
 
-      <div class="middle">
+
+      <div class="middle companyheader">
         <div class="wp">
-          <a href="index.html"><img class="fl" src="{% static 'images/logo.jpg' %}"/></a>
-          <div class="searchbox fr">
-            <div class="selectContainer fl">
-                            <span class="selectOption" id="jsSelectOption" data-value="course">
-                                公开课
-                            </span>
-              <ul class="selectMenu" id="jsSelectMenu">
-                <li data-value="course">公开课</li>
-                <li data-value="org">课程机构</li>
-                <li data-value="teacher">授课老师</li>
-              </ul>
-            </div>
-            <input id="search_keywords" class="fl" type="text" value="" placeholder="请输入搜索内容"/>
-            <img class="search_btn fr" id="jsSearchBtn" src="{% static 'images/search_btn.png' %}"/>
+          {# org-detail-home.html 能用 course_org 这个变量 ，因为 org-detail-home 继承了 org_base.html，故 org_base 也能用 这个变量  #}
+          <img class="fl" style="width: 112px;height: 103px" src="{{ MEDIA_URL }}{{ course_org.image}}"/>
+          <div class="head fl">
+            <h1>
+              慕课网
+              <img src="{% static 'images/authentication.png' %}"/>
+              <img src="{% static 'images/gold.png' %}"/>
+            </h1>
+            <p class="fl">
+              <span class="fl" style="margin-top:8px;color:#848484;">推荐指数： </span>
+              <span class="precision company-credit" data-star-scope="5.0"></span>
+              <span class="key">5.0</span>
+            </p>
           </div>
+          <div class="btn fr collectionbtn  notlogin" data-favid="22" data-fav-type="1">
+            {% if has_fav%}
+              已收藏
+            {% else %}
+              收藏
+            {% endif %}
+          </div>
+
         </div>
       </div>
-
-
-      <nav>
-        <div class="nav">
-          <div class="wp">
-            <ul>
-              <li class="{% ifequal request.path '/' %}active{% endifequal %}"><a href="{% url 'index' %}">首页</a></li>
-              <li class="{% ifequal request.path|slice:'7' '/course' %}active{% endifequal %}">
-                <a href="{% url 'courses:course_list' %}">
-                  公开课<img class="hot" src="{% static 'images/nav_hot.png' %}">
-                </a>
-              </li>
-              <li class="{% ifequal request.path|slice:'17' '/org/teacher/list' %}active{% endifequal %}">
-                <a href="{% url 'org:teacher_list' %}">授课教师</a>
-              </li>
-              <li class="{% ifequal request.path|slice:'9' '/org/list' %}active{% endifequal %}"><a href="{% url 'org:org_list' %}">授课机构</a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-
     </div>
   </header>
 </section>
+
 <section>
   <div class="wp">
     <ul class="crumbs">
@@ -116,121 +105,6 @@
     </div>
 
     {% block right_form %}
-    <div class="right companycenter layout grouping">
-      <div class="head">
-        <h1>全部课程</h1>
-        <a class="green fr more" href="org-detail-course.html">查看更多 > </a>
-      </div>
-      <div class="brief group_list">
-
-        <div class="module1_5 box">
-          <a href="course-detail.html"><img width="214" src="media/courses/2016/11/mysql.jpg"/></a>
-          <div class="des">
-            <a href="course-detail.html"><h2>django入门</h2></a>
-            <span class="fl">课时：<i class="key">0</i></span>
-            <span class="fr">参加人数：3</span>
-          </div>
-          <div class="bottom">
-            <span class="fl">慕课网</span>
-            <span class="star fr  notlogin
-                            " data-favid="13" data-fav-type="4">
-                            0
-                        </span>
-          </div>
-        </div>
-
-        <div class="module1_5 box">
-          <a href="course-detail.html"><img width="214"
-                                            src="media/courses/2016/11/540e57300001d6d906000338-240-135_mvvGYHL.jpg"/></a>
-          <div class="des">
-            <a href="course-detail.html"><h2>django实战项目</h2></a>
-            <span class="fl">课时：<i class="key">0</i></span>
-            <span class="fr">参加人数：0</span>
-          </div>
-          <div class="bottom">
-            <span class="fl">慕课网</span>
-            <span class="star fr  notlogin
-                            " data-favid="13" data-fav-type="4">
-                            0
-                        </span>
-          </div>
-        </div>
-
-        <div class="module1_5 box">
-          <a href="course-detail.html"><img width="214" src="media/courses/2016/12/python错误和异常.jpg"/></a>
-          <div class="des">
-            <a href="course-detail.html"><h2>python错误和异常</h2></a>
-            <span class="fl">课时：<i class="key">0</i></span>
-            <span class="fr">参加人数：0</span>
-          </div>
-          <div class="bottom">
-            <span class="fl">慕课网</span>
-            <span class="star fr  notlogin
-                            " data-favid="13" data-fav-type="4">
-                            0
-                        </span>
-          </div>
-        </div>
-
-
-      </div>
-    </div>
-    <div class="right companycenter layout">
-      <div class="head">
-        <h1>机构教师</h1>
-        <a class="green fr more" href="org-detail-teachers.html">查看更多 > </a>
-      </div>
-
-      <div class="diarys">
-        <div class="module5 share company-diary-box" style="padding:10px 0;">
-          <div class="left">
-            <img class="pic" src="media/teacher/2016/11/aobama_CXWwMef.png"/>
-            <p>昵称：bobby</p>
-          </div>
-          <div class="right">
-            <div class="top">
-              <div class="fl">
-                <a href=""><h1>java开发教程</h1></a>
-                <span>发表于：2015-10-12</span>
-              </div>
-            </div>
-            <div class="middle" style="border-bottom:0;">课程介绍</div>
-          </div>
-        </div>
-      </div>
-
-
-    </div>
-    <div class="right companycenter layout">
-      <div class="head">
-        <h1>机构介绍</h1>
-        <a class="green fr more" href="org-detail-desc.html">查看更多 > </a>
-      </div>
-      <div class="cont">&nbsp; &nbsp; <p>&nbsp; &nbsp;</p>
-        <h1 class="ue_t" label="Title center" name="tc"
-            style="border-bottom-color:#cccccc;border-bottom-width:2px;border-bottom-style:solid;padding:0px 4px 0px 0px;text-align:center;margin:0px 0px 20px;">
-          <span style="color:#c0504d;">[键入文档标题]</span></h1>
-        <p style="text-align:center;"><strong class="ue_t">[键入文档副标题]</strong></p>
-        <h3><span class="ue_t" style="font-family:幼圆">[标题 1]</span></h3>
-        <p class="ue_t" style="text-indent:2em;">对于“插入”选项卡上的库，在设计时都充分考虑了其中的项与文档整体外观的协调性。
-          您可以使用这些库来插入表格、页眉、页脚、列表、封面以及其他文档构建基块。 您创建的图片、图表或关系图也将与当前的文档外观协调一致。</p>
-        <p class="ue_t" style="text-indent:2em;"><img
-          src="media/courses/ueditor/57aa86a0000145c512000460_20161210234050_865.jpg" title=""
-          alt="57aa86a0000145c512000460.jpg"/></p>
-        <h3><span class="ue_t" style="font-family:幼圆">[标题 2]</span></h3>
-        <p><img
-          src="http://api.map.baidu.com/staticimage?center=116.410899,39.863624&zoom=11&width=530&height=340&markers=116.404,39.915"
-          width="530" height="340"/></p>
-        <p class="ue_t" style="text-indent:2em;">在“开始”选项卡上，通过从快速样式库中为所选文本选择一种外观，您可以方便地更改文档中所选文本的格式。
-          您还可以使用“开始”选项卡上的其他控件来直接设置文本格式。大多数控件都允许您选择是使用当前主题外观，还是使用某种直接指定的格式。</p>
-        <h3><span class="ue_t" style="font-family:幼圆">[标题 3]</span></h3>
-        <p>2016-12-10</p>
-        <p class="ue_t">对于“插入”选项卡上的库，在设计时都充分考虑了其中的项与文档整体外观的协调性。 您可以使用这些库来插入表格、页眉、页脚、列表、封面以及其他文档构建基块。
-          您创建的图片、图表或关系图也将与当前的文档外观协调一致。</p>
-        <p class="ue_t"><br/></p>
-        <p><br/></p>
-        <p><br/></p><a href="/company/desc/22/"><span class="green">[查看更多]</span></a></div>
-    </div>
     {% endblock %}
 
   </div>

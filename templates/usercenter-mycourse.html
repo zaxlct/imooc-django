@@ -26,11 +26,11 @@
       <div class="group_list brief">
         {% for user_course in user_courses  %}
         <div class="module1_5 box">
-          <a href="course-detail.html">
+          <a href="{% url 'courses:course_detail' user_course.course.id %}">
             <img width="214" height="190" class="scrollLoading" src="{{ MEDIA_URL }}{{ user_course.course.image }}"/>
           </a>
           <div class="des">
-            <a href="course-detail.html"><h2>{{ user_course.course.name }}</h2></a>
+            <a href="{% url 'courses:course_detail' user_course.course.id %}"><h2>{{ user_course.course.name }}</h2></a>
             <span class="fl">课时：<i class="key">{{ user_course.course.learn_times }}</i></span>
             <span class="fr">学习人数：{{ user_course.course.students }}</span>
           </div>
