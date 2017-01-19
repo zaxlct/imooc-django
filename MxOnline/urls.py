@@ -22,7 +22,7 @@ import xadmin
 
 from django.views.static import serve #处理静态文件
 
-from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, ResetView, ModifyPwdView
+from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, ResetView, ModifyPwdView, LogoutView
 from MxOnline.settings import MEDIA_ROOT
 
 urlpatterns = [
@@ -30,7 +30,8 @@ urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='index.html'), name='index'),
     url(r'^login/$', LoginView.as_view(), name='login'),
 
-    #
+    # 退出登录
+    url(r'^logout/$', LogoutView.as_view(), name='logout'),
 
     url(r'^register/$', RegisterView.as_view(), name='register'),
 

@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.backends import ModelBackend
 from django.db.models import Q
 from django.views.generic.base import View
 from django.contrib.auth.hashers import make_password
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponsePermanentRedirect
 
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
@@ -53,6 +53,14 @@ class LoginView(View):
                 return render(request, 'login.html', {'msg': '用户名或密码错误！'})
         else:
             return render(request, 'login.html', {'login_form': login_form})
+
+
+# 用户登出
+class LogoutView(View):
+    def get(self, request):
+        logout(request)
+        from django.core.urlresolvers import reverse
+        return HttpResponsePermanentRedirect(reverse('index'))
 
 
 class RegisterView(View):
@@ -321,6 +329,12 @@ class MyMessageView(LoginRequiredMixin, View):
         # 为什么是 request.user.id ，请看 UserMessage 里的注释
         # 如果 user = 0 ，代表全局消息，所有用户都能收到
         all_message = UserMessage.objects.filter(user=request.user.id)
+
+        #进入到我的消息页面后，把已读的消息清空
+        all_unread_message = UserMessage.objects.filter(user=request.user.id, has_read=False)
+        for unread_message in all_unread_message:
+            unread_message.has_read = True
+            unread_message.save()
 
         # 对个人消息分页
         try:
