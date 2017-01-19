@@ -47,7 +47,12 @@
                 </div>
               </div>
             </div>
-            {% else %}
+            <a href="">
+              <div class="msg-num">
+                <span id="MsgNum">{{ request.user.unread_nums }}</span>
+              </div>
+            </a>
+          {% else %}
             <a style="color:white" class="fr registerbtn" href="{% url 'register' %}">注册</a>
             <a style="color:white" class="fr loginbtn" href="{% url 'login' %}">登录</a>
           {% endif %}
@@ -121,7 +126,7 @@
         <li><a href="{% url 'users:mycourse' %}">我的课程</a></li>
         <li><a href="{% url 'users:myfav_org' %}">我的收藏</a></li>
         <li>
-          <a href="usercenter-message.html" style="position: relative;">
+          <a href="{% url 'users:mymessage' %}" style="position: relative;">
             我的消息
           </a>
         </li>

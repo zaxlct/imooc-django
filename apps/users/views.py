@@ -7,11 +7,13 @@ from django.views.generic.base import View
 from django.contrib.auth.hashers import make_password
 from django.http import HttpResponse
 
+from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
+
 from .models import UserProfile, EmailVerifyRecord
 from .forms import LoginForm, RegisterForm, ForgetForm, ModifyPwdForm, UploadImageForm, UserInfoForm
 from utils.email_send import send_register_email
 from utils.mixin_utils import LoginRequiredMixin
-from operation.models import UserCourse, UserFavorite
+from operation.models import UserCourse, UserFavorite, UserMessage
 from organization.models import CourseOrg, Teacher
 from courses.models import Course
 
@@ -76,6 +78,12 @@ class RegisterView(View):
             # is_active 是 auth_user 表里预定义的字段
             user_profile.is_active = False
             user_profile.save()
+
+            # 写入欢迎注册消息
+            user_message = UserMessage()
+            user_message.user = user_profile.id
+            user_message.message = '欢迎注册慕学在线网！'
+            user_message.save()
 
             # TODO 发送邮箱后提示用户
             # 发送邮件函数
@@ -305,3 +313,24 @@ class MyFavCourseView(LoginRequiredMixin, View):
          return render(request, 'usercenter-fav-course.html', {
              'course_list': course_list,
          })
+
+
+# 我的消息
+class MyMessageView(LoginRequiredMixin, View):
+    def get(self, request):
+        # 为什么是 request.user.id ，请看 UserMessage 里的注释
+        # 如果 user = 0 ，代表全局消息，所有用户都能收到
+        all_message = UserMessage.objects.filter(user=request.user.id)
+
+        # 对个人消息分页
+        try:
+            page = request.GET.get('page', 1)
+        except PageNotAnInteger:
+            page = 1
+
+        p = Paginator(all_message, 2, request=request)
+        messages = p.page(page)
+
+        return render(request, 'usercenter-message.html', {
+            'messages': messages,
+        })

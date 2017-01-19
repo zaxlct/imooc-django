@@ -44,7 +44,12 @@
                 </div>
               </div>
             </div>
-            {% else %}
+            <a href="">
+              <div class="msg-num">
+                <span id="MsgNum">{{ request.user.unread_nums }}</span>
+              </div>
+            </a>
+          {% else %}
             <a style="color:white" class="fr registerbtn" href="{% url 'register' %}">注册</a>
             <a style="color:white" class="fr loginbtn" href="{% url 'login' %}">登录</a>
           {% endif %}
