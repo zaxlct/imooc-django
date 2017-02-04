@@ -6,6 +6,7 @@ from django.db.models import Q
 from django.views.generic.base import View
 from django.contrib.auth.hashers import make_password
 from django.http import HttpResponse, HttpResponsePermanentRedirect
+from django.core.urlresolvers import reverse
 
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
@@ -33,6 +34,7 @@ class CustomBackend(ModelBackend):
             return None
 
 
+# 用户登录逻辑
 class LoginView(View):
     def get(self, request):
         return render(request, 'login.html', {})
@@ -43,10 +45,11 @@ class LoginView(View):
             user_name = request.POST.get('username', '')
             password = request.POST.get('password', '')
             user = authenticate(username=user_name, password=password)
+            # 用户登出 or 用户未登录
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return render(request, 'index.html')
+                    return HttpResponsePermanentRedirect(reverse('index'))
                 else:
                     return render(request, 'login.html', {'msg': '用户未激活！'})
             else:
@@ -59,7 +62,6 @@ class LoginView(View):
 class LogoutView(View):
     def get(self, request):
         logout(request)
-        from django.core.urlresolvers import reverse
         return HttpResponsePermanentRedirect(reverse('index'))
 
 

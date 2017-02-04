@@ -38,19 +38,19 @@
   <div class="wp">
     <ul class="feature">
       <li class="feature1">
-        <img class="pic" src="/static/images/feature1.png"/>
+        <img class="pic" src="{% static 'images/feature1.png' %}"/>
         <p class="center">专业权威</p>
       </li>
       <li class="feature2">
-        <img class="pic" src="/static/images/feature2.png"/>
+        <img class="pic" src="{% static 'images/feature2.png' %}"/>
         <p class="center">课程最新</p>
       </li>
       <li class="feature3">
-        <img class="pic" src="/static/images/feature3.png"/>
+        <img class="pic" src="{% static 'images/feature3.png' %}"/>
         <p class="center">名师授课</p>
       </li>
       <li class="feature4">
-        <img class="pic" src="/static/images/feature4.png"/>
+        <img class="pic" src="{% static 'images/feature4.png' %}"/>
         <p class="center">数据真实</p>
       </li>
     </ul>
@@ -64,9 +64,9 @@
       <h1>公开课程</h1>
       <div class="module1 eachmod">
         <div class="module1_1 left">
-          <img width="228" height="614" src="/static/images/module1_1.jpg"/>
+          <img width="228" height="614" src="{% static 'images/module1_1.jpg' %}"/>
           <p class="fisrt_word">名师授课<br/>专业权威</p>
-          <a class="more" href="course-list.html">查看更多课程 ></a>
+          <a class="more" href="{% url 'courses:course_list' %}">查看更多课程 ></a>
         </div>
         <div class="right group_list">
           <div class="module1_2 box">
@@ -114,222 +114,27 @@
       <h1>课程机构</h1>
       <div class="module3 eachmod">
         <div class="module3_1 left">
-          <img width="228" height="463" src="/static/images/module3_1.jpg"/>
+          <img width="228" height="463" src="{% static 'images/module3_1.jpg' %}"/>
           <p class="fisrt_word">名校来袭<br/>权威认证</p>
-          <a class="more" href="org-list.html">查看更多机构 ></a>
+          <a class="more" href="{% url 'org:org_list' %}">查看更多机构 ></a>
         </div>
         <div class="right">
           <ul>
-
-            <li class="">
-              <a href="org-detail-homepage.html">
+            {% for org in course_orgs %}
+            <li class="{% if forloop.counter|divisibleby:5 %}five{% endif %}">
+              <a href="{% url 'org:org_home' org.id %}">
                 <div class="company">
-                  <img width="184" height="100" src="/static/media/org/2016/11/imooc.png"/>
+                  <img width="184" height="100" src="{{ MEDIA_URL }}{{ org.image }}"/>
                   <div class="score">
                     <div class="circle">
-                      <h2>全国知名</h2>
+                      <h2>{{ org.tag }}</h2>
                     </div>
                   </div>
                 </div>
-                <p><span class="key" title="慕课网">慕课网</span></p>
+                <p><span class="key" title="{{ org.name }}">{{ org.name }}</span></p>
               </a>
             </li>
-
-            <li class="">
-              <a href="org-detail-homepage.html">
-                <div class="company">
-                  <img width="184" height="100" src="/static/media/org/2016/11/bjdx.jpg"/>
-                  <div class="score">
-                    <div class="circle">
-                      <h2>全国知名</h2>
-                    </div>
-                  </div>
-                </div>
-                <p><span class="key" title="北京大学">北京大学</span></p>
-              </a>
-            </li>
-
-            <li class="">
-              <a href="org-detail-homepage.html">
-                <div class="company">
-                  <img width="184" height="100" src="/static/media/org/2016/11/qhdx-logo.png"/>
-                  <div class="score">
-                    <div class="circle">
-                      <h2>全国知名</h2>
-                    </div>
-                  </div>
-                </div>
-                <p><span class="key" title="清华大学">清华大学</span></p>
-              </a>
-            </li>
-
-            <li class="">
-              <a href="org-detail-homepage.html">
-                <div class="company">
-                  <img width="184" height="100" src="/static/media/org/2016/11/njdx.jpg"/>
-                  <div class="score">
-                    <div class="circle">
-                      <h2>全国知名</h2>
-                    </div>
-                  </div>
-                </div>
-                <p><span class="key" title="南京大学">南京大学</span></p>
-              </a>
-            </li>
-
-            <li class="five">
-              <a href="org-detail-homepage.html">
-                <div class="company">
-                  <img width="184" height="100" src="/static/media/org/2016/11/imooc_klgAUn5.png"/>
-                  <div class="score">
-                    <div class="circle">
-                      <h2>全国知名</h2>
-                    </div>
-                  </div>
-                </div>
-                <p><span class="key" title="慕课网2">慕课网2</span></p>
-              </a>
-            </li>
-
-            <li class="">
-              <a href="org-detail-homepage.html">
-                <div class="company">
-                  <img width="184" height="100" src="/static/media/org/2016/11/imooc_Gn1sRjp.png"/>
-                  <div class="score">
-                    <div class="circle">
-                      <h2>全国知名</h2>
-                    </div>
-                  </div>
-                </div>
-                <p><span class="key" title="慕课网3">慕课网3</span></p>
-              </a>
-            </li>
-
-            <li class="">
-              <a href="org-detail-homepage.html">
-                <div class="company">
-                  <img width="184" height="100" src="/static/media/org/2016/11/imooc_Y2Tonsq.png"/>
-                  <div class="score">
-                    <div class="circle">
-                      <h2>全国知名</h2>
-                    </div>
-                  </div>
-                </div>
-                <p><span class="key" title="慕课网3">慕课网3</span></p>
-              </a>
-            </li>
-
-            <li class="">
-              <a href="org-detail-homepage.html">
-                <div class="company">
-                  <img width="184" height="100" src="/static/media/org/2016/11/imooc_OO2ykYP.png"/>
-                  <div class="score">
-                    <div class="circle">
-                      <h2>全国知名</h2>
-                    </div>
-                  </div>
-                </div>
-                <p><span class="key" title="慕课网4">慕课网4</span></p>
-              </a>
-            </li>
-
-            <li class="">
-              <a href="org-detail-homepage.html">
-                <div class="company">
-                  <img width="184" height="100" src="/static/media/org/2016/11/imooc_V0TJOyb.png"/>
-                  <div class="score">
-                    <div class="circle">
-                      <h2>全国知名</h2>
-                    </div>
-                  </div>
-                </div>
-                <p><span class="key" title="慕课网5">慕课网5</span></p>
-              </a>
-            </li>
-
-            <li class="five">
-              <a href="org-detail-homepage.html">
-                <div class="company">
-                  <img width="184" height="100" src="/static/media/org/2016/11/imooc_qEaMov1.png"/>
-                  <div class="score">
-                    <div class="circle">
-                      <h2>全国知名</h2>
-                    </div>
-                  </div>
-                </div>
-                <p><span class="key" title="慕课网666">慕课网666</span></p>
-              </a>
-            </li>
-
-            <li class="">
-              <a href="org-detail-homepage.html">
-                <div class="company">
-                  <img width="184" height="100" src="/static/media/org/2016/12/bjdx.jpg"/>
-                  <div class="score">
-                    <div class="circle">
-                      <h2>全国知名</h2>
-                    </div>
-                  </div>
-                </div>
-                <p><span class="key" title="慕学网">慕学网</span></p>
-              </a>
-            </li>
-
-            <li class="">
-              <a href="org-detail-homepage.html">
-                <div class="company">
-                  <img width="184" height="100" src="/static/media/org/2016/12/imooc_Gn1sRjp.png"/>
-                  <div class="score">
-                    <div class="circle">
-                      <h2>全国知名</h2>
-                    </div>
-                  </div>
-                </div>
-                <p><span class="key" title="python培训机构">python培训机构</span></p>
-              </a>
-            </li>
-
-            <li class="">
-              <a href="org-detail-homepage.html">
-                <div class="company">
-                  <img width="184" height="100" src="/static/media/org/2016/12/bjdx_cCpdUw8.jpg"/>
-                  <div class="score">
-                    <div class="circle">
-                      <h2>全国知名</h2>
-                    </div>
-                  </div>
-                </div>
-                <p><span class="key" title="vuejs培训">vuejs培训</span></p>
-              </a>
-            </li>
-
-            <li class="">
-              <a href="org-detail-homepage.html">
-                <div class="company">
-                  <img width="184" height="100" src="/static/media/org/2016/12/imooc_klgAUn5.png"/>
-                  <div class="score">
-                    <div class="circle">
-                      <h2>全国知名</h2>
-                    </div>
-                  </div>
-                </div>
-                <p><span class="key" title="nodejs培训">nodejs培训</span></p>
-              </a>
-            </li>
-
-            <li class="five">
-              <a href="org-detail-homepage.html">
-                <div class="company">
-                  <img width="184" height="100" src="/static/media/org/2016/12/bjdx_bcd0m07.jpg"/>
-                  <div class="score">
-                    <div class="circle">
-                      <h2>全国知名</h2>
-                    </div>
-                  </div>
-                </div>
-                <p><span class="key" title="慕学在线">慕学在线</span></p>
-              </a>
-            </li>
+            {% endfor %}
 
           </ul>
         </div>
