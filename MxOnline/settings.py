@@ -27,9 +27,9 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
 SECRET_KEY = '1t**wvn9pox&h7*(!vh66ej7+7&5b2iick6d0l5z&c16fg%cwe'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # AUTH 方法（支持邮箱登录）
@@ -166,3 +166,6 @@ EMAIL_FROM = "azaxlct@sina.com"
 #上传设置
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+#
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')

@@ -24,7 +24,7 @@ from django.views.static import serve #处理静态文件
 
 from users.views import IndexView
 from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, ResetView, ModifyPwdView, LogoutView
-from MxOnline.settings import MEDIA_ROOT
+from MxOnline.settings import MEDIA_ROOT, STATIC_ROOT
 
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
@@ -55,6 +55,13 @@ urlpatterns = [
     #配置上传文件的访问处理函数
     url(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
 
+    #配置 404，500 页面的静态文件访问处理
+    url(r'^static/(?P<path>.*)$', serve, {'document_root': STATIC_ROOT}),
+
     # 用户中心 URL 配置
     url(r'^users/', include('users.urls', namespace='users')),
 ]
+
+# 全局 404 页面配置（django 会自动调用这个变量）
+handler404 = 'users.views.page_not_found'
+handler500 = 'users.views.page_error'
