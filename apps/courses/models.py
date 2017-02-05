@@ -39,6 +39,14 @@ class Course(models.Model):
         # html 里可以直接使用
         # 获取该课程下面所有的章节的数量
         return self.lesson_set.all().count()
+    get_zj_nums.short_description = '章节数'
+
+    def go_to(self):
+        from django.utils.safestring import mark_safe
+        return mark_safe('<a href="http://www.projectsedu.com">跳转</a>')
+    go_to.short_description = '跳转'
+
+
 
     def get_learn_users(self):
         # 得到 UserCourse 这个数据表，然后 UserCourse 有个 User 属性，

@@ -2,8 +2,10 @@
 __author__ = 'zaxlct'
 __date__ = '2017/1/8 下午12:27'
 
-from .models import Course, Lesson, Video, CourseResource, BannerCourse
 import xadmin
+
+from .models import Course, Lesson, Video, CourseResource, BannerCourse
+from organization.models import CourseOrg
 
 # 添加课程的时候可以顺便添加章节
 class LessonInline(object):
@@ -19,7 +21,7 @@ class CourseResourceInline(object):
 
 class CourseAdmin(object):
     list_display = ['name', 'desc', 'detail', 'degree', 'learn_times', 'students', 'fav_nums',
-                    'click_nums', 'add_time']
+                    'click_nums', 'add_time', 'get_zj_nums', 'go_to']
     search_fields = ['name', 'desc', 'detail', 'degree', 'learn_times', 'students', 'fav_nums',
                     'click_nums']
     list_filter = ['name', 'desc', 'detail', 'degree', 'learn_times', 'students', 'fav_nums',
@@ -33,10 +35,30 @@ class CourseAdmin(object):
     #Inline # 添加课程的时候可以顺便添加章节、课程资源
     inlines = [LessonInline, CourseResourceInline]
 
+    # 在线编辑
+    list_editable = ['degree', 'desc']
+
+    # 定时刷新
+    refresh_times = [3, 5]
+
+    # 筛选最终的 result
     def queryset(self):
         qs = super(CourseAdmin, self).queryset()
         qs = qs.filter(is_banner=False)
         return qs
+
+    def save_models(self):
+        # 在保存课程的时候统计课程机构的课程数
+        # 比如保存了《前端教程》课程，保存之前选择了属于'慕课网'这个课程机构，保存完成后，慕课网课程机构下面的课程总数要 + 1
+        obj = self.new_obj
+        obj.save()
+        if obj.course_org is not None:
+            # 课程机构的实例
+            course_org = obj.course_org
+
+            course_org.course_nums = CourseOrg.objects.filter(course_org=course_org).count()
+            course_org.save()
+
 
 
 class BannerCourseAdmin(object):
