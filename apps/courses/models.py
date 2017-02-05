@@ -53,6 +53,15 @@ class Course(models.Model):
         return self.name
 
 
+class BannerCourse(Course):
+    class Meta:
+        verbose_name = u'轮播课程'
+        verbose_name_plural = verbose_name
+        # 如果不设置 proxy ，就会再生成一个 BannerCourse 数据表
+        proxy = True
+
+
+
 # 章节信息
 # 课程和章节是一对多的关系
 class Lesson(models.Model):
