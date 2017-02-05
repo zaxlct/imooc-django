@@ -41,6 +41,9 @@ class CourseAdmin(object):
     # 定时刷新
     refresh_times = [3, 5]
 
+    # 富文本
+    style_fields = {'detail': 'ueditor'}
+
     # 筛选最终的 result
     def queryset(self):
         qs = super(CourseAdmin, self).queryset()

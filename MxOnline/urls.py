@@ -60,6 +60,9 @@ urlpatterns = [
 
     # 用户中心 URL 配置
     url(r'^users/', include('users.urls', namespace='users')),
+
+    # DjangoUeditor
+    url(r'^ueditor/',include('DjangoUeditor.urls' )),
 ]
 
 # 全局 404 页面配置（django 会自动调用这个变量）
