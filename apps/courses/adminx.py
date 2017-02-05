@@ -13,6 +13,12 @@ class CourseAdmin(object):
                     'click_nums']
     list_filter = ['name', 'desc', 'detail', 'degree', 'learn_times', 'students', 'fav_nums',
                     'click_nums', 'add_time']
+    ordering = ['-click_nums']
+
+    # readonly_fields 和 exclude 的字段不要重复，否则会冲突
+    readonly_fields = ['click_nums']
+    exclude = ['fav_nums']
+
 
 class LessonAdmin(object):
     # 外键的处理方法

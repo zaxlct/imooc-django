@@ -17,6 +17,10 @@ class CourseOrgAdmin(object):
     search_fields = ['name', 'desc', 'click_nums', 'fav_nums', 'image', 'address', 'city']
     list_filter = ['name', 'desc', 'click_nums', 'fav_nums', 'image', 'address', 'city__name', 'add_time']
 
+    # 当有一个外键指向 CourseOrg 的时候，以 ajax 加载的方式显示 CourseOrg 列表供 select
+    # TODO 用了没效果，不知道为啥
+    relfield_style = 'fk-ajax'
+
 
 class TeacherAdmin(object):
     list_display = ['org', 'name', 'work_years', 'work_company', 'work_position', 'points', 'click_nums', 'fav_nums', 'add_time']
