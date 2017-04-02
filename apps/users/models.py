@@ -18,7 +18,7 @@ class UserProfile(AbstractUser):
         verbose_name = '用户信息'
         verbose_name_plural = verbose_name
 
-    def __unicode__(self):
+    def __str__(self):
         return self.username
 
 
@@ -33,6 +33,7 @@ class EmailVerifyRecord(models.Model):
         verbose_name = '邮箱验证码'
         verbose_name_plural = '邮箱验证码'
 
+
 class Banner(models.Model):
     title = models.CharField(max_length=100, verbose_name='标题')
     image = models.ImageField(upload_to='banner/%Y/%m', max_length=100, verbose_name='轮播图')
@@ -43,3 +44,6 @@ class Banner(models.Model):
     class Meta:
         verbose_name = '轮播图'
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.title
