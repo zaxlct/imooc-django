@@ -43,8 +43,8 @@
               </div>
             </div>
             {% else %}
-            <a style="color:white" class="fr registerbtn" href="register.html">注册</a>
-            <a style="color:white" class="fr loginbtn" href="/login/">登录</a>
+            <a style="color:white" class="fr registerbtn" href="{% url 'register' %}">注册</a>
+            <a style="color:white" class="fr loginbtn" href="{% url 'login' %}">登录</a>
           {% endif %}
 
         </div>
@@ -52,7 +52,7 @@
 
       <div class="middle">
         <div class="wp">
-          <a href="index.html"><img class="fl" src="{% static 'images/logo.jpg' %}"/></a>
+          <a href="{% url 'index' %}"><img class="fl" src="{% static 'images/logo.jpg' %}"/></a>
           <div class="searchbox fr">
             <div class="selectContainer fl">
                             <span class="selectOption" id="jsSelectOption" data-value="course">
