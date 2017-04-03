@@ -21,7 +21,7 @@ from django.views.generic import TemplateView
 import xadmin
 
 # from users.views import user_login
-from users.views import LoginView, RegisterView
+from users.views import LoginView, RegisterView, ActiveUserView
 
 urlpatterns = [
     url(r'^admin/', xadmin.site.urls),
@@ -32,10 +32,13 @@ urlpatterns = [
     # url(r'^login/$', TemplateView.as_view(template_name='login.html'), name='login')
 
     # 基于函数 的 View 映射 URL 方法
-    # url('^login/$', user_login, name='login'),
-    url('^login/$', LoginView.as_view(), name='login'),
+    # url(r'^login/$', user_login, name='login'),
+    url(r'^login/$', LoginView.as_view(), name='login'),
 
-    url('^register/$', RegisterView.as_view(), name='register'),
+    # 验证用户注册后，在邮件里点击注册链接
+    url(r'active/(?P<active_code>.*)/$', ActiveUserView.as_view(), name='user_active'),
+
+    url(r'^register/$', RegisterView.as_view(), name='register'),
     url(r'^forget/$', TemplateView.as_view(template_name='index.html'), name='forget_pwd'),
 
 ]
