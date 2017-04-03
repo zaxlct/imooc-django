@@ -41,87 +41,22 @@ function zy_Countdown(){
     setTimeout("zy_Countdown()",1000);
 }
 
-//刷新验证码
+	//注册刷新验证码点击事件
+	$('#email_register_form .captcha-refresh').click({'form_id':'email_register_form'},refresh_captcha);
+	$('#email_register_form .captcha').click({'form_id':'email_register_form'},refresh_captcha);
+	$('#mobile_register_form .captcha').click({'form_id':'jsRefreshCode'},refresh_captcha);
+	$('#changeCode').click({'form_id':'jsRefreshCode'},refresh_captcha);
+	$('#jsFindPwdForm .captcha-refresh').click({'form_id':'jsFindPwdForm'},refresh_captcha);
+	$('#jsFindPwdForm .captcha').click({'form_id':'jsFindPwdForm'},refresh_captcha);
+	$('#jsChangePhoneForm .captcha').click({'form_id':'jsChangePhoneForm'},refresh_captcha);
+
+// 刷新验证码
 function refresh_captcha(event){
     $.get("/captcha/refresh/?"+Math.random(), function(result){
         $('#'+event.data.form_id+' .captcha').attr("src",result.image_url);
         $('#id_captcha_0').attr("value",result.key);
     });
     return false;
-}
-
-//登录表单提交
-function login_form_submit(){
-    var $jsLoginBtn = $('#jsLoginBtn'),
-        $jsLoginTips = $('#jsLoginTips'),
-        $accountl = $("#account_l"),
-        args = window.location.search.substr(1,window.location.search.length).split('&'),
-        arg = [],
-        verify = verifyDialogSubmit(
-        [
-            {id: '#account_l', tips: Dml.Msg.epUserName, errorTips: Dml.Msg.erUserName, regName: 'phMail', require: true},
-            {id: '#password_l', tips: Dml.Msg.epPwd, errorTips: Dml.Msg.erPwd, regName: 'pwd', require: true}
-        ]
-    );
-    if(!verify){
-       return;
-    }
-    var autoLogin = false;
-    if ($('#jsAutoLogin').is(':checked')){
-        autoLogin = true;
-    }
-    $.each(args, function(key,value){
-        arg = value.split('=');
-        if(arg[0] == 'name'){
-            return false;
-        }
-    });
-    $.ajax({
-        cache: false,
-        type: 'post',
-        dataType:'json',
-        url:"/user/login/",
-        data:$('#jsLoginForm').serialize() + '&autologin='+autoLogin + '&' + arg[0] + '=' + arg[1],
-        async: true,
-        beforeSend:function(XMLHttpRequest){
-            $jsLoginBtn.val("登录中...");
-            $jsLoginBtn.attr("disabled","disabled");
-        },
-        success: function(data) {
-            if(data.account_l){
-                Dml.fun.showValidateError($accountl, data.account_l);
-            }else if(data.password_l){
-                Dml.fun.showValidateError($("#password_l"),data.password_l);
-            }else{
-                if(data.status == "success"){
-                    $('#jsLoginForm')[0].reset();
-                    window.location.href = data.url;
-                }else if(data.status == "failure"){
-                    //注册账户处于未激活状态
-                    if(data.msg=='no_active'){
-                        zyemail = $accountl.val();
-                        zyUname = zyemail;
-                        $('#jsEmailToActive').html(zyemail);
-                        var url = zyemail.split('@')[1],
-                            $jsGoToEmail = $('#jsGoToEmail');
-                        $jsGoToEmail.attr("href",hash[url]);
-                        if(undefined==hash[url] || hash[url]==null){
-                            $jsGoToEmail.parent().hide();
-                        }
-                         Dml.fun.showDialog('#jsUnactiveForm');
-                    }
-                    else{
-                        $jsLoginTips.html("账号或者密码错误，请重新输入").show();
-                    }
-                }
-            }
-        },
-        complete: function(XMLHttpRequest){
-            $jsLoginBtn.val("登录");
-            $jsLoginBtn.removeAttr("disabled");
-        }
-    });
-
 }
 
 
@@ -233,169 +168,3 @@ $('#jsSetNewPwdBtn').on('click', function(){
         }
     });
 })
-
-$(function() {
-    //兼容IE9下placeholder不显示问题
-    function isPlaceholder(){
-        var input = document.createElement('input');
-        return 'placeholder' in input;
-    }
-    if(!isPlaceholder()){
-        $("input").not("input[type='password']").each(
-            function(){
-                if($(this).val()=="" && $(this).attr("placeholder")!=""){
-                    $(this).val($(this).attr("placeholder"));
-                    $(this).focus(function(){
-                        if($(this).val()==$(this).attr("placeholder")) $(this).val("");
-                    });
-                    $(this).blur(function(){
-                        if($(this).val()=="") $(this).val($(this).attr("placeholder"));
-                    });
-                }
-        });
-        $("textarea").each(
-            function(){
-                if($(this).val()=="" && $(this).attr("placeholder")!=""){
-                    $(this).val($(this).attr("placeholder"));
-                    $(this).focus(function(){
-                        if($(this).val()==$(this).attr("placeholder")) $(this).val("");
-                    });
-                    $(this).blur(function(){
-                        if($(this).val()=="") $(this).val($(this).attr("placeholder"));
-                    });
-                }
-        });
-        var pwdField    = $("input[type=password]");
-        var pwdVal      = pwdField.attr('placeholder');
-        pwdField.after('<input id="pwdPlaceholder" type="text" value='+pwdVal+' autocomplete="off" />');
-        var pwdPlaceholder = $('#pwdPlaceholder');
-        pwdPlaceholder.show();
-        pwdField.hide();
-
-        pwdPlaceholder.focus(function(){
-            pwdPlaceholder.hide();
-            pwdField.show();
-            pwdField.focus();
-        });
-
-        pwdField.blur(function(){
-            if(pwdField.val() == '') {
-                pwdPlaceholder.show();
-                pwdField.hide();
-            }
-        });
-    }
-
-    $('.imgslide').unslider({
-        speed: 500,
-        delay: 3000,
-        complete: function() {},
-        keys: true,
-        dots: true,
-        fluid: false
-    });
-    var unslider = $('.imgslide').unslider();
-    $('.unslider-arrow').click(function() {
-        var fn = this.className.split(' ')[1];
-        unslider.data('unslider')[fn]();
-    });
-
-    $('.tab > h2').click(function(){
-        var _self = $(this),
-            index = _self.index();
-        _self.addClass('active').siblings().removeClass('active');
-        $('.tab-form').eq(index).removeClass('hide').siblings('.tab-form').addClass('hide');
-    });
-
-    //input的focus和blur效果
-	$('input[type=text]').focus(function(){
-		$(this).parent().removeClass('blur').addClass('focus');
-	});
-	$('input[type=text]').blur(function(){
-		$(this).parent().removeClass('focus').addClass('blur');
-	});
-    //input的focus和blur效果
-	$('input[type=password]').focus(function(){
-		$(this).parent().removeClass('blur').addClass('focus');
-	});
-	$('input[type=password]').blur(function(){
-		$(this).parent().removeClass('focus').addClass('blur');
-	});
-
-    //弹出框关闭按钮
-	$('.jsCloseDialog').on('click', function(){
-		$(this).parents('.dialogbox').hide();
-        $('#dialogBg').hide();
-        if($(this).siblings('form')[0]){
-            $(this).siblings('form')[0].reset();
-        }
-	});
-
-
-    //注册刷新验证码点击事件
-    $('#email_register_form .captcha-refresh').click({'form_id':'email_register_form'},refresh_captcha);
-    $('#email_register_form .captcha').click({'form_id':'email_register_form'},refresh_captcha);
-    $('#mobile_register_form .captcha').click({'form_id':'jsRefreshCode'},refresh_captcha);
-    $('#changeCode').click({'form_id':'jsRefreshCode'},refresh_captcha);
-    $('#jsFindPwdForm .captcha-refresh').click({'form_id':'jsFindPwdForm'},refresh_captcha);
-    $('#jsFindPwdForm .captcha').click({'form_id':'jsFindPwdForm'},refresh_captcha);
-    $('#jsChangePhoneForm .captcha').click({'form_id':'jsChangePhoneForm'},refresh_captcha);
-
-    //登录
-    $('#jsLoginBtn').on('click',function(){
-        login_form_submit();
-    })
-    //登录表单键盘事件
-    $("#jsLoginForm").keydown(function(event){
-        if(event.keyCode == 13) {
-            $('#jsLoginBtn').trigger('click');
-        }
-    });
-
-    //邮箱注册
-    $('#jsEmailRegBtn').on('click',function(){
-        register_form_submit(this,'emailReg');
-    });
-    $("#email_register_form").keydown(function(event){
-        if(event.keyCode == 13){
-         $('#jsEmailRegBtn').trigger('click');
-        }
-    });
-
-
-    //首页-忘记密码表单键盘事件
-    $('#jsFindPwdBtn').on('click', function(){
-        find_password_form_submit();
-    });
-    $("#jsFindPwdForm").keydown(function(event){
-        if(event.keyCode == 13){
-               $('#jsFindPwdBtn').trigger('click');
-        }
-    });
-
-    //再次发送激活邮件事件
-	$('#jsSenEmailAgin').on('click', function(e){
-        e.preventDefault();
-		$(".zy_success").removeClass("upmove");
-		$(this).parent().hide();
-		$(".sendE2").show().find("span").html("60s");
-        $.ajax({
-            cache:false,
-            type:'get',
-            dataType:'json',
-            url: "/user/send_again_email/",
-            data: {username:zyUname},
-             success: function(data){
-                 zy_str="验证邮件发送成功";
-                 //console.log(data)
-                 if(data)
-                    zy_Countdown();
-             },
-            error:function(){
-                zy_str="验证邮件发送失败";
-            }
-
-         });
-	});
-
-});
