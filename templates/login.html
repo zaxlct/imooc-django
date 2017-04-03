@@ -69,13 +69,18 @@
       <div class="fl form-box">
         <h2>帐号登录</h2>
         <form action="{% url 'login' %}" method="post" autocomplete="off">
-          <div class="form-group marb20 ">
+          <div class="form-group marb20 {% if form_errors.username %} errorput {% endif %}">
             <input name="username" id="username" type="text" placeholder="手机号/邮箱"/>
           </div>
-          <div class="form-group marb8 ">
+          <div class="form-group marb8 {% if form_errors.password %} errorput {% endif %}">
             <input name="password" id="password_l" type="password" placeholder="请输入您的密码"/>
           </div>
-          <div class="error btns login-form-tips" id="jsLoginTips">{{ msg }}</div>
+          <div class="error btns login-form-tips" id="jsLoginTips">
+            {% for key, error in form_errors.items %}
+              {{ error }}
+            {% endfor %}
+            {% if not form_errors %} {{ msg }} {% endif %}
+          </div>
           <div class="auto-box marb38">
             <a class="fr" href="{% url 'forget_pwd' %}">忘记密码？</a>
           </div>

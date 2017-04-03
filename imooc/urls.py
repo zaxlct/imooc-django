@@ -20,7 +20,8 @@ from django.views.generic import TemplateView
 
 import xadmin
 
-from users.views import user_login
+# from users.views import user_login
+from users.views import LoginView
 
 urlpatterns = [
     url(r'^admin/', xadmin.site.urls),
@@ -29,7 +30,9 @@ urlpatterns = [
     # TemplateView 只返回静态模板，不用在 views 里写逻辑
     # url(r'^login/$', TemplateView.as_view(template_name='login.html'), name='login')
 
-    url('^login/$', user_login, name='login'),
+    # 基于函数 的 View 映射 URL 方法
+    # url('^login/$', user_login, name='login'),
+    url('^login/$', LoginView.as_view(), name='login'),
 
     # 暂时模拟
     url(r'^register/$', TemplateView.as_view(template_name='index.html'), name='register'),
