@@ -13,11 +13,14 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import os
 import sys
 
+# mysql 数据库
 import pymysql
 pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# 设置 apps, extra_apps 目录
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
 
@@ -28,9 +31,10 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
 SECRET_KEY = 'ashpz)a*a*vv!=48uwwhtnk^gytj$t71o5jh9j834bp0wb+0ps'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
+
 
 
 # Application definition
@@ -50,6 +54,7 @@ INSTALLED_APPS = [
     'crispy_forms'
 ]
 
+# UserProfile 覆盖了 django 内置的 user 表
 AUTH_USER_MODEL = 'users.UserProfile'
 
 MIDDLEWARE = [
@@ -67,6 +72,7 @@ ROOT_URLCONF = 'imooc.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        # 设置  templates 目录
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -85,7 +91,7 @@ WSGI_APPLICATION = 'imooc.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-
+# 数据库配置
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -133,6 +139,8 @@ USE_TZ = False # 数据库取本地时间
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 STATIC_URL = '/static/'
+
+# static 目录配置
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
