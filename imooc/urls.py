@@ -19,8 +19,18 @@ from django.views.generic import TemplateView
 
 import xadmin
 
+from users.views import user_login
+
 urlpatterns = [
     url(r'^admin/', xadmin.site.urls),
     url(r'^$', TemplateView.as_view(template_name='index.html'), name='index'),
-    url(r'^login/$', TemplateView.as_view(template_name='login.html'), name='login')
+
+    # TemplateView 只返回静态模板，不用在 views 里写逻辑
+    # url(r'^login/$', TemplateView.as_view(template_name='login.html'), name='login')
+
+    url('^login/$', user_login, name='login'),
+
+    # 暂时模拟
+    url(r'^register/$', TemplateView.as_view(template_name='index.html'), name='register'),
+    url(r'^forget/$', TemplateView.as_view(template_name='index.html'), name='forget_pwd'),
 ]

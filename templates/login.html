@@ -68,8 +68,7 @@
       </div>
       <div class="fl form-box">
         <h2>帐号登录</h2>
-        <form action="/login/" method="post" autocomplete="off">
-          <input type='hidden' name='csrfmiddlewaretoken' value='mymQDzHWl2REXIfPMg2mJaLqDfaS1sD5'/>
+        <form action="{% url 'login' %}" method="post" autocomplete="off">
           <div class="form-group marb20 ">
             <input name="username" id="username" type="text" placeholder="手机号/邮箱"/>
           </div>
@@ -78,13 +77,12 @@
           </div>
           <div class="error btns login-form-tips" id="jsLoginTips">{{ msg }}</div>
           <div class="auto-box marb38">
-
-            <a class="fr" href="forgetpwd.html">忘记密码？</a>
+            <a class="fr" href="{% url 'forget_pwd' %}">忘记密码？</a>
           </div>
-          <input class="btn btn-green" id="jsLoginBtn" type="submit" value="立即登录 > "/>
+          <input class="btn btn-green" id="jsLoginBtn" type="submit" value="立即登录 "/>
         {% csrf_token %}
         </form>
-        <p class="form-p">没有慕学在线网帐号？<a href="register.html">[立即注册]</a></p>
+        <p class="form-p">没有慕学在线网帐号？<a href="{% url 'register' %}">[立即注册]</a></p>
       </div>
     </div>
   </div>
