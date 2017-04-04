@@ -21,7 +21,7 @@ from django.views.generic import TemplateView
 import xadmin
 
 # from users.views import user_login
-from users.views import LoginView, RegisterView, ActiveUserView
+from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, ResetView, ModifyPwdView
 
 urlpatterns = [
     url(r'^admin/', xadmin.site.urls),
@@ -36,11 +36,18 @@ urlpatterns = [
     url(r'^login/$', LoginView.as_view(), name='login'),
 
     # 验证用户注册后，在邮件里点击注册链接
-    url(r'active/(?P<active_code>.*)/$', ActiveUserView.as_view(), name='user_active'),
+    url(r'^active/(?P<active_code>.*)/$', ActiveUserView.as_view(), name='user_active'),
 
+    # 注册页面
     url(r'^register/$', RegisterView.as_view(), name='register'),
-    url(r'^forget/$', TemplateView.as_view(template_name='index.html'), name='forget_pwd'),
+    # 忘记密码
+    url(r'^forget/$', ForgetPwdView.as_view(), name='forget_pwd'),
 
+    #用户在邮件里点击重置密码链接
+    url(r'^reset/(?P<active_code>.*)/$', ResetView.as_view(), name='reset_pwd'),
+
+    # 重置密码表单 POST 请求
+    url(r'^modify_pwd/$', ModifyPwdView.as_view(), name='modify_pwd'),
 ]
 
 
