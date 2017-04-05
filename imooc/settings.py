@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'xadmin',
     'crispy_forms',
     'captcha',
+    'pure_pagination',
 ]
 
 # UserProfile 覆盖了 django 内置的 user 表
@@ -83,10 +84,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                #配置了这个之后，就会把最底下的  MEDIA_URL 注册到 html ，这样 html 就能用 MEDIA_URL 变量
+                'django.template.context_processors.media',
             ],
         },
     },
 ]
+# In Django 1.10 `django.core.context_processors` has been moved to `django.template.context_processors`
 
 WSGI_APPLICATION = 'imooc.wsgi.application'
 
@@ -147,10 +151,13 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 EMAIL_HOST = 'smtp.qq.com'
 EMAIL_PORT = 25
 EMAIL_HOST_USER = '10581290@qq.com'
-EMAIL_HOST_PASSWORD = 'scdxhwjinajgb'
+EMAIL_HOST_PASSWORD = 'scdxhwjinajgbjjc'
 EMAIL_USE_TLS = True
 EMAIL_FROM = '10581290@qq.com'

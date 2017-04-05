@@ -5,3 +5,4 @@ httplib2==0.10.3
 Pillow==4.0.0
 PyMySQL==0.7.10
 django-simple-captcha==0.4.6
+django-pure-pagination

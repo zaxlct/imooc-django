@@ -11,6 +11,7 @@ from utils.email_send import send_register_email
 
 # Create your views here.
 
+
 #让用户可以用邮箱登录
 class CustomBackend(ModelBackend):
     def authenticate(self, username=None, password=None, **kwargs):

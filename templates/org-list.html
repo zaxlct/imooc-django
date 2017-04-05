@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}课程机构{% endblock %}
+<!-- 页面 body 内容 -->
+{% block custom_content %}
+<section>
+  <div class="wp butler_list_box list">
+    <div class='left'>
+      <div class="listoptions">
+        <ul>
+          <li>
+            <h2>机构类别</h2>
+            <div class="cont">
+              {% for org in all_orgs.object_list %}
+                <a href="?ct="><span class="active2">{{ org.name }}</span></a>
+              {% endfor %}
+            </div>
+          </li>
+          <li>
+            <h2>所在地区</h2>
+            <div class="more">更多</div>
+            <div class="cont">
+              {% for city in all_citys %}
+                <a href="?ct="><span class="active2">{{ city.name }}</span></a>
+              {% endfor %}
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="all">共<span class="key">{{ org_nums }}</span>家</div>
+      <div class="butler_list company list">
+        <div class="layout">
+          <div class="head">
+            <ul class="tab_header">
+              <li class="active"><a href="?ct=&city=">全部</a></li>
+              <li class=""><a href="?sort=students&ct=&city=">学习人数 &#8595;</a></li>
+              <li class=""><a href="?sort=courses&ct=&city=">课程数 &#8595;</a></li>
+            </ul>
+          </div>
+
+          {% for org in all_orgs.object_list %}
+            <dl class="des difdes">
+            <dt>
+              <a href="org-detail-homepage.html">
+                <img width="200" height="120" class="scrollLoading" data-url="{{ MEDIA_URL }}{{ org.image }}"/>
+              </a>
+            </dt>
+            <dd>
+              <div class="clearfix">
+                <a href="org-detail-homepage.html">
+                  <h1>{{ org.name }}</h1>
+                  <div class="pic fl">
+                    <img src="../images/authentication.png"/>
+                    <img src="../images/gold.png"/>
+                  </div>
+                </a>
+              </div>
+              <ul class="cont">
+                <li class="first"><p class="pic9">课程数：<span>{{ org.course_nums }}</span></p>
+                  <p class="c7">学习人数：<span>{{ org.students }}</span></p></li>
+                <li class="c8" style="padding-left:18px;">{{ org.address }}</li>
+                <li class="pic10" style="padding-left:18px;">经典课程：
+                  <a href="/diary/19/">c语言基础入门</a>
+                  <a href="/diary/16/">数据库基础</a>
+                </li>
+              </ul>
+            </dd>
+            <div class="buy start_groupbuy jsShowPerfect2" data-id="22"><br/>联系<br/>服务</div>
+          </dl>
+          {% endfor %}
+
+        </div>
+        <!-- 分页器 -->
+        <div class="pageturn">
+          <ul class="pagelist">
+            {% if all_orgs.has_previous %}
+            <li class="long">
+              <a href="?{{ all_orgs.previous_page_number.querystring }}" class="prev">上一页</a>
+            </li>
+            {% endif %}
+
+            {% for page in all_orgs.pages %}
+              {% if page %}
+                {% ifequal page all_orgs.number %}
+                  <li class="active"><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                {% else %}
+                  <li><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                {% endifequal %}
+              {% else %}
+                <li class="none"><a href="">...</a></li>
+              {% endif %}
+            {% endfor %}
+            {% if all_orgs.has_next %}
+              <li class="long"><a href="?{{ all_orgs.next_page_number.querystring }}">下一页</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="right companyright">
+      <div class="head">我要学习</div>
+      <form class="rightform" id="jsStayForm">
+        <div>
+          <img src="../images/rightform1.png"/>
+          <input type="text" name="name" id="companyName" placeholder="名字" maxlength="25"/>
+        </div>
+        <div>
+          <img src="../images/rightform2.png"/>
+          <input type="text" name="mobile" id="companyMobile" placeholder="联系电话"/>
+        </div>
+        <div>
+          <img src="../images/rightform3.png"/>
+          <input type="text" name="course_name" id="companyAddress" placeholder="课程名" maxlength="50"/>
+        </div>
+        <p class="error company-tips" id="jsCompanyTips"></p>
+        <input class="btn" type="text" id="jsStayBtn" value="立即咨询 >"/>
+      </form>
+    </div>
+
+    <div class="right companyrank layout">
+      <div class="head">授课机构排名</div>
+
+
+      <dl class="des">
+        <dt class="num fl">1</dt>
+        <dd>
+          <a href="/company/2/"><h1>慕课网</h1></a>
+          <p>北京市</p>
+        </dd>
+      </dl>
+
+      <dl class="des">
+        <dt class="num fl">2</dt>
+        <dd>
+          <a href="/company/2/"><h1>慕课网2</h1></a>
+          <p>深圳市</p>
+        </dd>
+      </dl>
+
+      <dl class="des">
+        <dt class="num fl">3</dt>
+        <dd>
+          <a href="/company/2/"><h1>北京大学</h1></a>
+          <p>北京市</p>
+        </dd>
+      </dl>
+
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

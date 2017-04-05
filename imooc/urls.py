@@ -17,19 +17,28 @@ from django.conf import settings
 from django.conf.urls import url, include
 # from django.contrib import admin
 from django.views.generic import TemplateView
+from django.views.static import serve #处理静态文件
+
+# from django.views.static import serve #处理静态文件
+from imooc.settings import MEDIA_ROOT
 
 import xadmin
 
 # from users.views import user_login
 from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, ResetView, ModifyPwdView
+from organization.views import OrgView
 
 urlpatterns = [
     url(r'^admin/', xadmin.site.urls),
     url(r'^$', TemplateView.as_view(template_name='index.html'), name='index'),
+    # 验证码
     url(r'^captcha/', include('captcha.urls')),
 
+    #配置上传文件的访问处理函数
+    url(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
+
     # TemplateView 只返回静态模板，不用在 views 里写逻辑
-    # url(r'^login/$', TemplateView.as_view(template_name='login.html'), name='login')
+    # url(r'^login/$', TemplateView.as_view(template_name='login.html'), name='login'),
 
     # 基于函数 的 View 映射 URL 方法
     # url(r'^login/$', user_login, name='login'),
@@ -48,6 +57,11 @@ urlpatterns = [
 
     # 重置密码表单 POST 请求
     url(r'^modify_pwd/$', ModifyPwdView.as_view(), name='modify_pwd'),
+
+
+    #课程机构首页
+    url('^org_list/$', OrgView.as_view(), name='org_list'),
+    # url(r'^org/$', include('organization.urls', namespace='org')),
 ]
 
 
