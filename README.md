@@ -11,10 +11,14 @@
 
 ### 如何启动项目
 - 克隆项目
-`git clone https://github.com/zaxlct/MxOnline_Django`
+```bash
+git clone https://github.com/zaxlct/MxOnline_Django
+```
 
 - 下载项目依赖
- `make dev`
+```bash
+make dev
+```
  
 - 配置数据库
  1. 确保你已经安装了 MySQL
@@ -33,7 +37,9 @@
  ```
  
 - 创建数据表
- `make migrate`
+```bash
+make migrate
+```
  
 - 配置 PyCharm 项目环境变量
 1. ![点击 Edit Config](https://ww2.sinaimg.cn/large/006tNbRwly1fecpi4b3emj30uq08kt9v.jpg)
