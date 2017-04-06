@@ -26,7 +26,6 @@ import xadmin
 
 # from users.views import user_login
 from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, ResetView, ModifyPwdView
-from organization.views import OrgView
 
 urlpatterns = [
     url(r'^admin/', xadmin.site.urls),
@@ -59,9 +58,8 @@ urlpatterns = [
     url(r'^modify_pwd/$', ModifyPwdView.as_view(), name='modify_pwd'),
 
 
-    #课程机构首页
-    url('^org_list/$', OrgView.as_view(), name='org_list'),
-    # url(r'^org/$', include('organization.urls', namespace='org')),
+    #课程机构相关 URL
+    url(r'^org/', include('organization.urls', namespace='org')),
 ]
 
 

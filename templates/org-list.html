@@ -121,7 +121,8 @@
           <input type="text" name="course_name" id="companyAddress" placeholder="课程名" maxlength="50"/>
         </div>
         <p class="error company-tips" id="jsCompanyTips"></p>
-        <input class="btn" type="text" id="jsStayBtn" value="立即咨询 >"/>
+        <input class="btn" type="text" id="jsStayBtn" value="立即咨询"/>
+        {% csrf_token %}
       </form>
     </div>
 
@@ -140,4 +141,33 @@
   </div>
 </section>
 
+{% endblock %}
+{% block custom_js %}
+<script>
+  $(function () {
+    $('#jsStayBtn').on('click', function () {
+      $.ajax({
+        cache: false,
+        type: "POST",
+        dataType: "json",
+        url: "{% url 'org:add_ask' %}",
+        //表单提交可以用 serialize 方法把 csrf token 一块序列化过来
+        data: $('#jsStayForm').serialize(),
+        async: true,
+        success: function (data) {
+          if (data.status == 'success') {
+            $('#jsStayForm')[0].reset();
+            alert("提交成功")
+          } else if (data.status == 'fail') {
+            $('#jsCompanyTips').html(data.msg)
+          }
+        },
+        error: function(error) {
+          console.log('error')
+          // console.log(error.responseText.msg)
+        }
+      });
+    });
+  })
+</script>
 {% endblock %}

@@ -1,12 +1,16 @@
+import json
+
 from django.shortcuts import render
 from django.views.generic import View
+from django.http import HttpResponse
 # Create your views here.
 
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 from .models import CourseOrg, CityDict
+from .forms import UserAskForm
 
 
-# 课程机构
+# 课程机构列表页，筛选页
 class OrgView(View):
     def get(self, request):
         all_orgs = CourseOrg.objects.all()
@@ -52,3 +56,17 @@ class OrgView(View):
             'category': category,
             'hot_orgs': hot_orgs,
         })
+
+
+# 用户添加咨询课程表单提交
+class AddUserAskView(View):
+    def post(self, request):
+        user_ask_form = UserAskForm(request.POST)
+        res = dict()
+        if user_ask_form.is_valid():
+            user_ask_form.save(commit=True)
+            res['status'] = 'success'
+        else:
+            res['status'] = 'fail'
+            res['msg'] = '添加出错'
+        return HttpResponse(json.dumps(res), content_type='application/json')
