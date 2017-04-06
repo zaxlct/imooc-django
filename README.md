@@ -55,7 +55,7 @@ make migrate
 ![点击 环境变量配置](https://ww1.sinaimg.cn/large/006tKfTcly1fecplahtbzj31480xu446.jpg)
 
 第三步
-![输入环境变量](https://ww2.sinaimg.cn/large/006tKfTcly1fecplosr4fj30qg0tyac2.jpg)
+![输入环境变量](https://ww3.sinaimg.cn/large/006tKfTcly1fecrb0y7p9j30qg062wff.jpg)
 ```
 Name:   DJANGO_SETTINGS_MODULE
 Value:  imooc.settingsdev
@@ -74,7 +74,7 @@ make run
 而且 ALLOWED_HOSTS 需要配置本地 IP。这些只有在开发项目时才用到的配置可以放到 `settingsdev.py` 里。
 另外项目开发阶段还可以安装辅助插件（比如`django-debug-toolbar`）也能配置到 `settingsdev.py` 里。
 
-**注意：PyCharm 默认 `settings.py` 为配置文件，所以需要更改一下项目环境变量配置，开发时以  `settingsdev.py` 为准。 **
+** 注意：PyCharm 默认 `settings.py` 为配置文件，所以需要更改一下项目环境变量配置，开发时以  `settingsdev.py` 为准。 **
 
 
 ### Django 操作 MySql 配置
