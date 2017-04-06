@@ -31,6 +31,7 @@ class CourseComments(models.Model):
 
 class UserFavorite(models.Model):
     user = models.ForeignKey(UserProfile, verbose_name='用户')
+    # ID 是课程的 ID 或者是 讲师、课程机构的 ID
     fav_id = models.IntegerField(default=0, verbose_name='收藏数据 Id')
     fav_type = models.IntegerField(choices=( (1, '课程'), (2, '课程机构'), (3, '讲师') ), default=1, verbose_name='收藏类型')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
@@ -38,6 +39,12 @@ class UserFavorite(models.Model):
     class Meta:
         verbose_name = '用户收藏'
         verbose_name_plural = verbose_name
+
+    # 初始化判断是否收藏
+    # has_fav = False
+    # if request.user.is_authenticated():
+    #     if UserProfile.objects.filter(user=request.user, fav_id=course_org.id, fav_type=2):
+    #         has_fav = True
 
 
 class UserMessage(models.Model):

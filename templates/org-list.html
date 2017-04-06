@@ -49,13 +49,13 @@
           {% for org in all_orgs.object_list %}
             <dl class="des difdes">
             <dt>
-              <a href="org-detail-homepage.html">
+              <a href="{% url 'org:org_home' org.id %}">
                 <img width="200" height="120" class="scrollLoading" data-url="{{ MEDIA_URL }}{{ org.image }}"/>
               </a>
             </dt>
             <dd>
               <div class="clearfix">
-                <a href="org-detail-homepage.html">
+                <a href="{% url 'org:org_home' org.id %}">
                   <h1>{{ org.name }}</h1>
                   <div class="pic fl">
                     <img src="{% static 'images/authentication.png' %}"/>
