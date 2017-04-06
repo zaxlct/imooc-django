@@ -1,3 +1,16 @@
+# IMOOC
+仿照[慕课网](http://www.imooc.com/)搭建的在线编程学习平台
+
+
+### 如何启动项目
+1. 克隆项目
+`git clone https://github.com/zaxlct/MxOnline_Django`
+2. 下载项目依赖
+ `make dev`
+3. 创建数据表
+ `make migrate`
+4. 启动 Django 的 server
+ `make run`
 ### 依赖
 - python 3.5
 - Django==1.10.5
