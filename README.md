@@ -1,7 +1,6 @@
 # IMOOC
-仿照[慕课网](http://www.imooc.com/)搭建的在线编程学习平台
-
-## master 分支是 python 3 环境，其余的所有分支均为 Python 2.7
+- 仿照[慕课网](http://www.imooc.com/)搭建的在线编程学习平台
+- **master 分支是 python 3 环境，其余的所有分支均为 Python 2.7**
 - 下面所有的配置只针对 master 分支，其余的分支都是按照课程章节划分的，请按照需求选择分支
 - 如果该项目对您有帮助，欢迎 star ：)
 
