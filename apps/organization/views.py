@@ -167,39 +167,33 @@ class OrgTeacherView(View):
 class AddFavView(View):
     # 用户收藏、取消收藏 课程机构
     def post(self, request):
-        fav_id = request.POST.get('fav_id', 0)
-        fav_type = request.POST.get('fav_type', 0)
+        fav_id = int(request.POST.get('fav_id', 0))
+        fav_type = int(request.POST.get('fav_type', 0))
 
-        #判断用户登录状态
+        res = dict()
         if not request.user.is_authenticated():
-            res = {}
             res['status'] = 'fail'
-            res['msg'] = u'用户未登录'
+            res['msg'] = '用户未登录'
             return HttpResponse(json.dumps(res), content_type='application/json')
 
         # 查询收藏记录
-        exist_records = UserFavorite.objects.filter(user=request.user, fav_id=int(fav_id), fav_type=int(fav_type))
-
-        # 收藏已经存在
-        res = {}
+        exist_records = UserFavorite.objects.filter(user=request.user, fav_id=fav_id, fav_type=fav_type)
         if exist_records:
-            # 如果记录已经存在，则表示用户取消收藏
             exist_records.delete()
             res['status'] = 'success'
-            res['msg'] = u'收藏'
+            res['msg'] = '收藏'
         else:
             user_fav = UserFavorite()
-            if int(fav_id) > 0 and int(fav_type) > 0:
+            if fav_id and fav_type:
                 user_fav.user = request.user
-                user_fav.fav_id = int(fav_id)
-                user_fav.fav_type = int(fav_type)
-                # 完成收藏需要三个字段 user_id，fav_id， fav_type
+                user_fav.fav_id = fav_id
+                user_fav.fav_type = fav_type
                 user_fav.save()
 
                 res['status'] = 'success'
-                res['msg'] = u'已收藏'
+                res['msg'] = '已收藏'
             else:
                 res['status'] = 'fail'
-                res['msg'] = u'收藏出错'
-
+                res['msg'] = '收藏出错'
         return HttpResponse(json.dumps(res), content_type='application/json')
+
