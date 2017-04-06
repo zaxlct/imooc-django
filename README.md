@@ -9,16 +9,19 @@
 - python 3.5
 - django 1.10.5
 
+
 ### 如何启动项目
 - 克隆项目
 ```bash
 git clone https://github.com/zaxlct/MxOnline_Django
 ```
 
+
 - 下载项目依赖
 ```bash
 make dev
 ```
+ 
  
 - 配置数据库
  1. 确保你已经安装了 MySQL
@@ -36,22 +39,28 @@ make dev
 }
  ```
  
+ 
 - 创建数据表
 ```bash
 make migrate
 ```
+
  
 - 配置 PyCharm 项目环境变量
+
 第一步
 ![点击 Edit Config](https://ww2.sinaimg.cn/large/006tNbRwly1fecpi4b3emj30uq08kt9v.jpg)
+
 第二步
 ![点击 环境变量配置](https://ww1.sinaimg.cn/large/006tKfTcly1fecplahtbzj31480xu446.jpg)
+
 第三步
 ![输入环境变量](https://ww2.sinaimg.cn/large/006tKfTcly1fecplosr4fj30qg0tyac2.jpg)
 ```
 Name:   DJANGO_SETTINGS_MODULE
 Value:  imooc.settingsdev
 ```
+
 
 - 启动 Django 的 server
 ```bash
