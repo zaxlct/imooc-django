@@ -42,14 +42,21 @@ make migrate
 ```
  
 - 配置 PyCharm 项目环境变量
-1. ![点击 Edit Config](https://ww2.sinaimg.cn/large/006tNbRwly1fecpi4b3emj30uq08kt9v.jpg)
-2. ![点击 环境变量配置](https://ww1.sinaimg.cn/large/006tKfTcly1fecplahtbzj31480xu446.jpg)
-3. ![输入环境变量](https://ww2.sinaimg.cn/large/006tKfTcly1fecplosr4fj30qg0tyac2.jpg)
-Name: `DJANGO_SETTINGS_MODULE`
-Value: `imooc.settingsdev`
+第一步
+![点击 Edit Config](https://ww2.sinaimg.cn/large/006tNbRwly1fecpi4b3emj30uq08kt9v.jpg)
+第二步
+![点击 环境变量配置](https://ww1.sinaimg.cn/large/006tKfTcly1fecplahtbzj31480xu446.jpg)
+第三步
+![输入环境变量](https://ww2.sinaimg.cn/large/006tKfTcly1fecplosr4fj30qg0tyac2.jpg)
+```
+Name:   DJANGO_SETTINGS_MODULE
+Value:  imooc.settingsdev
+```
 
 - 启动 Django 的 server
- `make run`
+```bash
+make run
+```
  
  
 ### `settingsdev.py` 有什么用？
