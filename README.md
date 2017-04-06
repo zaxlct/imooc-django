@@ -1,28 +1,89 @@
 # IMOOC
 仿照[慕课网](http://www.imooc.com/)搭建的在线编程学习平台
 
+## master 分支是 python 3 环境，其余的所有分支均为 Python 2.7
+- 下面所有的配置只针对 master 分支，其余的分支都是按照课程章节划分的，请按照需求选择分支
+- 如果该项目对您有帮助，欢迎 star ：)
+
+
+### 环境
+- python 3.5
+- django 1.10.5
 
 ### 如何启动项目
-1. 克隆项目
+- 克隆项目
 `git clone https://github.com/zaxlct/MxOnline_Django`
-2. 下载项目依赖
+
+- 下载项目依赖
  `make dev`
-3. 创建数据表
+ 
+- 配置数据库
+ 1. 确保你已经安装了 MySQL
+ 2. `setting.py`里的 `DATABASES` 填入你的本地的数据库信息
+ ```python
+ # 这是我本机的数据库信息，仅提供参考
+ DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'imooc',
+        'USER': 'root', 
+        'PASSWORD': 'root',
+        'HOST': '127.0.0.1',
+    }
+}
+ ```
+ 
+- 创建数据表
  `make migrate`
-4. 启动 Django 的 server
+ 
+- 配置 PyCharm 项目环境变量
+1. ![点击 Edit Config](https://ww2.sinaimg.cn/large/006tNbRwly1fecpi4b3emj30uq08kt9v.jpg)
+2. ![点击 环境变量配置](https://ww1.sinaimg.cn/large/006tKfTcly1fecplahtbzj31480xu446.jpg)
+3. ![输入环境变量](https://ww2.sinaimg.cn/large/006tKfTcly1fecplosr4fj30qg0tyac2.jpg)
+Name: `DJANGO_SETTINGS_MODULE`
+Value: `imooc.settingsdev`
+
+- 启动 Django 的 server
  `make run`
-### 依赖
-- python 3.5
-- Django==1.10.5
-- Pillow==4.0.0
-- PyMySQL==0.7.10
-- httplib2==0.10.3
-- django-formtools==2.0
-- django-crispy-forms==1.6.1
+ 
+ 
+### `settingsdev.py` 有什么用？
+项目上线时 `settings.py` 必须设置 `DEBUG=False`,当 `DEBUG=FALSE`时，Django 不会用自带的 server 去加载 js/css 等静态文件，需要用 nginx 之类的去做静态文件的 server。    
+
+而且 ALLOWED_HOSTS 需要配置本地 IP。这些只有在开发项目时才用到的配置可以放到 `settingsdev.py` 里。
+另外项目开发阶段还可以安装辅助插件（比如`django-debug-toolbar`）也能配置到 `settingsdev.py` 里。
+
+**注意：PyCharm 默认 `settings.py` 为配置文件，所以需要更改一下项目环境变量配置，开发时以  `settingsdev.py` 为准。 **
 
 
-### users
-- 邮箱验证码
-- 图片轮播
+### Django 操作 MySql 配置
+```
+# 安装 PyMySQL
+pip install PyMySQL
 
-operation 是底层的 app，储存用户操作的内容，比如用户的评论、点赞
+# settings.py
+import pymysql
+pymysql.install_as_MySQLdb()
+```
+
+### 安装支持 python3 的 xadmin
+- 复制 `extra_apps` 目录下的 xadmin 到你的项目
+- 安装 `httplib2 django-formtools django-crispy-forms`
+- `INSTALLED_APPS` 里增加 `xadmin, crispy_forms`
+剩下的就和安装 xadmin 步骤一样了，就不啰嗦了
+
+
+### 为什么我这个 xadmin 支持 python3 ？
+说多了都是泪，一行一行的改报错呗
+
+
+### python3 的一些坑
+`models.py` 里 `def __unicode__(self):` => `def __str__(self):`
+
+
+### Django 1.10 的一些坑
+In Django 1.10 `django.core.context_processors` has been moved to `django.template.context_processors`
+
+
+### TODO 
+添加 Docker 配置文件，实现一键 Docker 部署项目
