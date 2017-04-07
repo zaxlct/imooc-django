@@ -60,6 +60,9 @@ urlpatterns = [
 
     #课程机构相关 URL
     url(r'^org/', include('organization.urls', namespace='org')),
+
+    # 课程相关 URL 配置
+    url(r'^course/', include('courses.urls', namespace='courses')),
 ]
 
 
