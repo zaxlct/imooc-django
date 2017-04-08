@@ -14,7 +14,6 @@ from utils.mixin_utils import LoginRequiredMixin
 
 # Create your views here.
 
-
 # 课程列表首页
 class CourseListView(View):
     def get(self, request):

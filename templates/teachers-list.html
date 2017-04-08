@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}课程讲师 - 慕学在线网{% endblock %}
+
+{% block custom_bread %}
+    <section>
+        <div class="wp">
+            <ul class="crumbs">
+                <li><a href="{% url 'index' %}">首页</a>></li>
+                <li>课程讲师</li>
+            </ul>
+        </div>
+    </section>
+{% endblock %}
+
+{% block custom_content %}
+<section>
+  <div class="wp butler_list_box list">
+    <div class='left'>
+      <div class="butler_list layout">
+        <div class="head">
+          <ul class="fl tab_header">
+            <li class="{% ifequal sort '' %}active{% endifequal %}"><a href="?sort=">全部</a></li>
+            <li class="{% ifequal sort 'hot' %}active{% endifequal %}"><a href="?sort=hot">人气 &#8595;</a></li>
+          </ul>
+          <div class="fr butler-num">共<span class="key">9</span>人&nbsp;&nbsp;&nbsp;</div>
+        </div>
+        {# 讲师循环 #}
+        {% for teacher in all_teachers.object_list %}
+        <dl class="des">
+          <dt>
+            <a href="{% url 'org:teacher_detail' teacher.id %}">
+              <div class="picpic">
+                <img width="100" height="100" class="scrollLoading" src="{{ MEDIA_URL }}{{ teacher.image }}"/>
+              </div>
+            </a>
+          <div class="btn">
+            <div class="fr btn2 bdsharebuttonbox">
+              <span class="fl">分享</span>
+              <a href="#" class="bds_more" data-cmd="more"></a>
+            </div>
+          </div>
+          </dt>
+          <dd>
+            <a href="{% url 'org:teacher_detail' teacher.id %}">
+              <h1>{{ teacher.name }}<span class="key picbig">金牌讲师</span></h1>
+            </a>
+            <ul class="cont">
+              <li>工作年限：<span>{{ teacher.work_years }}年</span></li>
+              <li>工作职位：<span>{{ teacher.work_position }}</span></li>
+              <li>就职公司：<span>{{ teacher.work_company }}</span></li>
+              <li>年龄：<span>{{ teacher.age }}岁</span></li>
+              <li>教学特点：<span>{{ teacher.points }}</span></li>
+            </ul>
+          </dd>
+          <a class="buy buyservice" href="{% url 'org:teacher_detail' teacher.id %}"><br/>查看<br/>详情</a>
+        </dl>
+        {% endfor %}
+
+
+      </div>
+      <!-- 分页器 -->
+        <div class="pageturn">
+          <ul class="pagelist">
+            {% if all_teachers.has_previous %}
+            <li class="long">
+              <a href="?{{ all_teachers.previous_page_number.querystring }}" class="prev">上一页</a>
+            </li>
+            {% endif %}
+
+            {% for page in all_teachers.pages %}
+              {% if page %}
+                {% ifequal page all_teachers.number %}
+                  <li class="active"><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                {% else %}
+                  <li><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                {% endifequal %}
+              {% else %}
+                <li class="none"><a href="">...</a></li>
+              {% endif %}
+            {% endfor %}
+            {% if all_teachers.has_next %}
+              <li class="long"><a href="?{{ all_teachers.next_page_number.querystring }}">下一页</a></li>
+            {% endif %}
+          </ul>
+        </div>
+    </div>
+    <div class="right layout">
+      <div class="head">讲师排行榜</div>
+      {# 讲师排行榜  #}
+      {% for hot_teacher in sorted_teacher %}
+      <dl class="des">
+        <span class="num fl">1</span>
+        <a href="/diary/hk_detail/6/">
+          <dt>
+            <img width="50" height="50" class="scrollLoading" src="{{ MEDIA_URL }}{{ hot_teacher.image }}"/>
+          </dt>
+        </a>
+        <dd>
+          <a href="/diary/hk_detail/6/">
+            <h1 title="bobby">{{ hot_teacher.name }}</h1>
+          </a>
+          <p>工作年限：<span>{{ hot_teacher.work_years }}年</span></p>
+        </dd>
+      </dl>
+      {% endfor %}
+
+
+    </div>
+  </div>
+</section>
+{% endblock %}

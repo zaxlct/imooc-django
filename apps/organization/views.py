@@ -3,13 +3,14 @@ import json
 from django.shortcuts import render
 from django.views.generic import View
 from django.http import HttpResponse
+from django.db.models import Q
 # Create your views here.
 
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
-from .models import CourseOrg, CityDict
+from .models import CourseOrg, CityDict, Teacher
 from .forms import UserAskForm
 from operation.models import UserFavorite
-from users.models import UserProfile
+from courses.models import Course
 
 
 # 课程机构列表页，筛选页
@@ -197,3 +198,63 @@ class AddFavView(View):
                 res['msg'] = '收藏出错'
         return HttpResponse(json.dumps(res), content_type='application/json')
 
+
+# 讲师详情页
+class TeacherListView(View):
+    def get(self, request):
+        all_teachers = Teacher.objects.all()
+        sorted_teacher = Teacher.objects.all().order_by('-click_nums')[:3]
+
+        search_keywords = request.GET.get('keywords', '')
+        if search_keywords:
+            all_teachers = all_teachers.filter(
+                Q(name__icontains=search_keywords) |
+                Q(work_company__icontains=search_keywords) |
+                Q(work_position__icontains=search_keywords)
+            )
+        sort = request.GET.get('sort', '')
+        if sort == 'hot':
+            all_teachers = all_teachers.order_by('-click_nums')
+
+        # 对讲师进行分页
+        try:
+            page = request.GET.get('page', 1)
+        except PageNotAnInteger:
+            page = 1
+
+        p = Paginator(all_teachers, 2, request=request)
+        teachers = p.page(page)
+
+        return render(request, 'teachers-list.html', {
+            'all_teachers': teachers,
+            'sorted_teacher': sorted_teacher,
+            'sort': sort,
+        })
+
+
+# 讲师详情
+class TeacherDetailView(View):
+    def get(self, request, teacher_id):
+        sorted_teacher = Teacher.objects.all().order_by('-click_nums')[:3]
+
+        teacher = Teacher.objects.get(id=int(teacher_id))
+        teacher.click_nums += 1
+        teacher.save()
+        all_courses = Course.objects.filter(teacher=teacher)
+
+        has_teacher_faved = False
+        # 注意这里有个坑就是 teacher_id 是字符串，teacher.id 是数字
+        if UserFavorite.objects.filter(user=request.user, fav_type=3, fav_id=teacher.id):
+            has_teacher_faved = True
+
+        has_org_faved = False
+        if UserFavorite.objects.filter(user=request.user, fav_type=2, fav_id=teacher.org.id):
+            has_org_faved = True
+
+        return render(request, 'teacher-detail.html', {
+            'teacher': teacher,
+            'all_courses': all_courses,
+            'sorted_teacher': sorted_teacher,
+            'has_teacher_faved': has_teacher_faved,
+            'has_org_faved': has_org_faved,
+        })
