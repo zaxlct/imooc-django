@@ -4,7 +4,6 @@
 - 下面所有的配置只针对 master 分支，其余的分支都是按照课程章节划分的，请按照需求选择分支
 - 如果该项目对您有帮助，欢迎 star ：)
 
-
 ### 环境
 - python 3.5
 - django 1.10.5
@@ -108,3 +107,6 @@ In Django 1.10 `django.core.context_processors` has been moved to `django.templa
 
 ### TODO 
 添加 Docker 配置文件，实现一键 Docker 部署项目
+
+### 其他
+[Django + Vue 单页面应用的开发环境搭建](http://www.jianshu.com/p/fe74907e16b9)
