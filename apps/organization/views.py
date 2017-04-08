@@ -308,7 +308,7 @@ class TeacherDetailView(View):
         all_courses = Course.objects.filter(teacher=teacher)
 
         has_teacher_faved = False
-        if UserFavorite.objects.filter(user=request.user, fav_type=3, fav_id=teacher_id):
+        if UserFavorite.objects.filter(user=request.user, fav_type=3, fav_id=teacher.id):
             has_teacher_faved = True
 
         has_org_faved = False
