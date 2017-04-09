@@ -5,7 +5,6 @@ from django.views.generic.base import View
 from django.db.models import Q
 from django.http import HttpResponse
 
-
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import Course, CourseResource, Video
@@ -13,6 +12,7 @@ from operation.models import UserFavorite, UserCourse, CourseComments
 from utils.mixin_utils import LoginRequiredMixin
 
 # Create your views here.
+
 
 # 课程列表首页
 class CourseListView(View):
@@ -88,6 +88,8 @@ class CourseDetailView(View):
 class CourseInfoView(LoginRequiredMixin, View):
     def get(self, request, course_id):
         course = Course.objects.get(id=int(course_id))
+        course.students +=1
+        course.save()
 
         # 查询用户是否已经学习了该课程
         user_courses = UserCourse.objects.filter(user=request.user, course=course)

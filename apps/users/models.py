@@ -18,6 +18,11 @@ class UserProfile(AbstractUser):
         verbose_name = '用户信息'
         verbose_name_plural = verbose_name
 
+    def get_unread_nums(self):
+        # 获取用户未读数据数量
+        from operation.models import UserMessage
+        return UserMessage.objects.filter(user=self.id, has_read=False).count()
+
     def __str__(self):
         return self.username
 
@@ -25,7 +30,7 @@ class UserProfile(AbstractUser):
 class EmailVerifyRecord(models.Model):
     code = models.CharField(max_length=20, verbose_name='验证码')
     email = models.EmailField(max_length=50, verbose_name='邮箱')
-    send_type = models.CharField(max_length=18, choices=(('register', '邮箱'), ('forget', '修改密码'), ('update_email', '修改密码')),
+    send_type = models.CharField(max_length=18, choices=(('register', '邮箱'), ('forget', '修改密码'), ('update_email', '修改邮箱')),
                                  verbose_name='验证码类型')
     send_time = models.DateField(default=datetime.now, verbose_name='发送时间')
 

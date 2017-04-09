@@ -167,6 +167,20 @@ class OrgTeacherView(View):
 
 class AddFavView(View):
     # 用户收藏、取消收藏 课程机构
+    def set_fav_nums(self, fav_type, fav_id, num=1):
+        if fav_type == 1:
+            course = Course.objects.get(id=fav_id)
+            course.fav_nums += num
+            course.save()
+        elif fav_type == 2:
+            course_org = CourseOrg.objects.get(id=fav_id)
+            course_org.fav_nums += num
+            course_org.save()
+        elif fav_type == 3:
+            teacher = Teacher.objects.get(id=fav_id)
+            teacher.fav_nums += num
+            teacher.save()
+
     def post(self, request):
         fav_id = int(request.POST.get('fav_id', 0))
         fav_type = int(request.POST.get('fav_type', 0))
@@ -181,6 +195,7 @@ class AddFavView(View):
         exist_records = UserFavorite.objects.filter(user=request.user, fav_id=fav_id, fav_type=fav_type)
         if exist_records:
             exist_records.delete()
+            self.set_fav_nums(fav_type, fav_id, -1)
             res['status'] = 'success'
             res['msg'] = '收藏'
         else:
@@ -190,6 +205,7 @@ class AddFavView(View):
                 user_fav.fav_id = fav_id
                 user_fav.fav_type = fav_type
                 user_fav.save()
+                self.set_fav_nums(fav_type, fav_id, 1)
 
                 res['status'] = 'success'
                 res['msg'] = '已收藏'
@@ -199,7 +215,7 @@ class AddFavView(View):
         return HttpResponse(json.dumps(res), content_type='application/json')
 
 
-# 讲师详情页
+# 讲师列表页
 class TeacherListView(View):
     def get(self, request):
         all_teachers = Teacher.objects.all()

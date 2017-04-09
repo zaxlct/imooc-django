@@ -18,6 +18,7 @@ class Course(models.Model):
     fav_nums = models.IntegerField(default=0, verbose_name='收藏人数')
     image = models.ImageField(upload_to='courses/%Y/%m', verbose_name='封面图', max_length=100)
     click_nums = models.IntegerField(default=0, verbose_name='点击数')
+    is_banner = models.BooleanField(default=False, verbose_name=u'是否是轮播图')
     category = models.CharField(default='后端', max_length=20, verbose_name='课程类别')
     tag = models.CharField(default='', verbose_name='课程标签', max_length=10)
     youneed_konw = models.CharField(default='', max_length=300, verbose_name='课前须知')

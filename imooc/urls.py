@@ -25,7 +25,7 @@ from imooc.settings import MEDIA_ROOT
 import xadmin
 
 # from users.views import user_login
-from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, ResetView, ModifyPwdView
+from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, ResetView, ModifyPwdView, LogoutView
 
 urlpatterns = [
     url(r'^admin/', xadmin.site.urls),
@@ -51,6 +51,9 @@ urlpatterns = [
     # 忘记密码
     url(r'^forget/$', ForgetPwdView.as_view(), name='forget_pwd'),
 
+    # 退出登录
+    url(r'^logout/$', LogoutView.as_view(), name='logout'),
+
     #用户在邮件里点击重置密码链接
     url(r'^reset/(?P<active_code>.*)/$', ResetView.as_view(), name='reset_pwd'),
 
@@ -63,6 +66,9 @@ urlpatterns = [
 
     # 课程相关 URL 配置
     url(r'^course/', include('courses.urls', namespace='courses')),
+
+    # 用户中心 URL 配置
+    url(r'^users/', include('users.urls', namespace='users')),
 ]
 
 
