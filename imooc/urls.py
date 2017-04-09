@@ -20,16 +20,17 @@ from django.views.generic import TemplateView
 from django.views.static import serve #处理静态文件
 
 # from django.views.static import serve #处理静态文件
-from imooc.settings import MEDIA_ROOT
+from imooc.settings import MEDIA_ROOT, STATIC_ROOT
 
 import xadmin
 
 # from users.views import user_login
+from users.views import IndexView
 from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, ResetView, ModifyPwdView, LogoutView
 
 urlpatterns = [
     url(r'^admin/', xadmin.site.urls),
-    url(r'^$', TemplateView.as_view(template_name='index.html'), name='index'),
+    url(r'^$', IndexView.as_view(), name="index"),
     # 验证码
     url(r'^captcha/', include('captcha.urls')),
 
@@ -69,8 +70,14 @@ urlpatterns = [
 
     # 用户中心 URL 配置
     url(r'^users/', include('users.urls', namespace='users')),
+
+    #配置 404，500 页面的静态文件访问处理
+    url(r'^static/(?P<path>.*)$', serve, {'document_root': STATIC_ROOT}),
 ]
 
+# 全局 404 页面配置（django 会自动调用这个变量）
+handler404 = 'users.views.page_not_found'
+handler500 = 'users.views.page_error'
 
 if settings.DEBUG:
     import debug_toolbar

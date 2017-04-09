@@ -147,12 +147,14 @@ USE_TZ = False # 数据库取本地时间
 STATIC_URL = '/static/'
 
 # static 目录配置
+# 如果 DEBUG 为 TRUE 这里就会失效，需要用 NGIX 代理
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 EMAIL_HOST = 'smtp.qq.com'

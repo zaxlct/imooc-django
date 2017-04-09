@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+{% load staticfiles %}
+<head>
+	<meta charset="UTF-8">
+	<title>500</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+</head>
+<body class="bg503 errorpage">
+<section>
+	<div class="wp">
+		<div class="cont">
+			<div class="fl error_cut"><img src="{% static 'images/pic503.png' %}"/></div>
+			<div class="fr error_cut">
+				<img src="{% static 'images/word503.png' %}"/>
+				<br/><br/><br/><br/><br/><br/>
+				<p>服务器错误，请稍后重新刷新。</p>
+			</div>
+		</div>
+	</div>
+</section>
+</body>
+</html>
