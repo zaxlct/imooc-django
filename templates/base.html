@@ -33,7 +33,7 @@
 
       <div class="middle">
         <div class="wp">
-          <a href="index.html"><img class="fl" src="{% static 'images/logo.jpg' %}"/></a>
+          <a href="{% url 'index' %}"><img class="fl" src="{% static 'images/logo.jpg' %}"/></a>
           <div class="searchbox fr">
             <div class="selectContainer fl">
                             <span class="selectOption" id="jsSelectOption" data-value="course">
@@ -56,7 +56,7 @@
         <div class="nav">
           <div class="wp">
             <ul>
-              <li><a href="index.html">首页</a></li>
+              <li><a href="{% url 'index' %}">首页</a></li>
               <li>
                 <a href="course-list.html">
                   公开课<img class="hot" src="{% static 'images/nav_hot.png' %}">
@@ -81,7 +81,7 @@
 <section>
   <div class="wp">
     <ul class="crumbs">
-      <li><a href="index.html">首页</a>></li>
+      <li><a href="{% url 'index' %}">首页</a>></li>
       <li>课程机构</li>
     </ul>
   </div>
