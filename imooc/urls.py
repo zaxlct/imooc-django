@@ -20,7 +20,10 @@ from django.views.generic import TemplateView
 from django.views.static import serve #处理静态文件
 
 # from django.views.static import serve #处理静态文件
-from imooc.settings import MEDIA_ROOT, STATIC_ROOT
+from imooc.settings import MEDIA_ROOT
+
+# 项目部署上线时使用
+# from imooc.settings import STATIC_ROOT
 
 import xadmin
 
@@ -71,8 +74,8 @@ urlpatterns = [
     # 用户中心 URL 配置
     url(r'^users/', include('users.urls', namespace='users')),
 
-    #配置 404，500 页面的静态文件访问处理
-    url(r'^static/(?P<path>.*)$', serve, {'document_root': STATIC_ROOT}),
+    #配置 404，500 页面的静态文件访问处理（ 项目部署上线时使用）
+    # url(r'^static/(?P<path>.*)$', serve, {'document_root': STATIC_ROOT}),
 ]
 
 # 全局 404 页面配置（django 会自动调用这个变量）
