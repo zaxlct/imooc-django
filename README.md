@@ -110,3 +110,30 @@ In Django 1.10 `django.core.context_processors` has been moved to `django.templa
 
 ### 其他
 [Django + Vue 单页面应用的开发环境搭建](http://www.jianshu.com/p/fe74907e16b9)
+
+
+
+ Docker-compose部署(CentOS 7)
+-
+### 1.Docker安装
+- yum install -y docker
+- systemctl start docker
+- chkconfig docker on 
+### 2.Dcoker-compose安装
+- yum install -y python-pip
+- pip install -U docker-compose
+- docker-compose -v
+### 3.Dowload
+- git clone https://github.com/zaxlct/MxOnline_Django.git
+- 修改conf/nginx/mx_nginx.conf中的IP或者域名
+- 修改sesttings中数据库配置HOST为mysql
+### 4.启动docker-compose
+- cd MxOnline_Django/
+- docker-compose up -d
+
+
+### 5.同步数据库
+- docker-compose exec kele_imooc /usr/local/bin/python manage.py makemigrations
+- docker-compose exec kele_imooc /usr/local/bin/python manage.py migrate
+
+#### 最后还需要导入你的数据
