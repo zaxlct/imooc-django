@@ -91,7 +91,7 @@
               <img width="233" height="190" src="{{ MEDIA_URL }}{{ course.image }}"/>
             </a>
             <div class="des">
-              <a href="course-detail.html">
+              <a href="{% url 'courses:course_detail' course.id %}">
                 <h2 title="django入门">{{ course.name }}</h2>
               </a>
               <span class="fl">难度：<i class="key">{{ course.degree }}</i></span>

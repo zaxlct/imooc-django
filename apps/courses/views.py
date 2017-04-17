@@ -101,6 +101,7 @@ class CourseInfoView(LoginRequiredMixin, View):
             user_courses = UserCourse(user=request.user, course=course)
             user_courses.save()
 
+        # 得出学过该课程的同学还学过的课程
         user_courses = UserCourse.objects.filter(course=course)
         user_ids = [user_course.user.id for user_course in user_courses]
         all_user_courses = UserCourse.objects.filter(user_id__in=user_ids)
@@ -122,10 +123,19 @@ class CommentView(LoginRequiredMixin, View):
         course = Course.objects.get(id=int(course_id))
         all_resources = CourseResource.objects.filter(course=course)
         all_comments = CourseComments.objects.filter(course=course)
+
+        # 得出学过该课程的同学还学过的课程
+        user_courses = UserCourse.objects.filter(course=course)
+        user_ids = [user_course.user.id for user_course in user_courses]
+        all_user_courses = UserCourse.objects.filter(user_id__in=user_ids)
+        course_ids = [user_course.course.id for user_course in all_user_courses]
+        relate_courses = Course.objects.filter(id__in=course_ids).order_by('-click_nums')[:5]
+
         return render(request, 'course-comment.html', {
             'course': course,
             'all_comments': all_comments,
             'all_resources': all_resources,
+            'relate_courses': relate_courses,
         })
 
 

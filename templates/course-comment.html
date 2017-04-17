@@ -143,43 +143,14 @@
                 <div class="cp-tab-pannel js-comp-tab-pannel" data-pannel="course" style="display: block">
                   <!-- img 200 x 112 -->
                   <ul class="other-list">
-
+                    {% for relate_course in relate_courses %}
                     <li class="curr">
-                      <a href="course-detail.html" target="_blank">
-                        <img src="../media/courses/2016/11/540e57300001d6d906000338-240-135_n0L8vbw.jpg"
-                             alt="django与vuejs实战项目2">
-                        <span class="name autowrap">django与vuejs实战项目2</span>
+                      <a href="{% url 'courses:course_detail' relate_course.id %}" target="_blank">
+                        <img src="{{ MEDIA_URL }}{{ relate_course.image }}"  alt="{{ relate_course.name }}" />
+                        <span class="name autowrap">{{ relate_course.name }}</span>
                       </a>
                     </li>
-
-                    <li class="curr">
-                      <a href="course-detail.html" target="_blank">
-                        <img src="../media/courses/2016/12/python面向对象.jpg" alt="python面向对象">
-                        <span class="name autowrap">python面向对象</span>
-                      </a>
-                    </li>
-
-                    <li class="curr">
-                      <a href="course-detail.html" target="_blank">
-                        <img src="../media/courses/2016/12/python文件处理.jpg" alt="python文件处理">
-                        <span class="name autowrap">python文件处理</span>
-                      </a>
-                    </li>
-
-                    <li class="curr">
-                      <a href="course-detail.html" target="_blank">
-                        <img src="../media/courses/2016/11/mysql.jpg" alt="django入门">
-                        <span class="name autowrap">django入门</span>
-                      </a>
-                    </li>
-
-                    <li class="curr">
-                      <a href="course-detail.html" target="_blank">
-                        <img src="../media/courses/2016/12/mysql.jpg" alt="xadmin进阶开发">
-                        <span class="name autowrap">xadmin进阶开发</span>
-                      </a>
-                    </li>
-
+                    {% endfor %}
                   </ul>
                 </div>
                 <div class="cp-tab-pannel js-comp-tab-pannel" data-pannel="plan">
