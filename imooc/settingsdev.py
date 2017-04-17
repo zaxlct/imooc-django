@@ -8,3 +8,14 @@ ALLOWED_HOSTS += INTERNAL_IPS
 ALLOWED_HOSTS.append('localhost')
 INSTALLED_APPS.append('debug_toolbar')
 MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
+
+# 数据库的配置不是死的，请按照你开发时本机的数据库名字，密码，端口填写
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'imooc',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': '127.0.0.1',
+    }
+}
