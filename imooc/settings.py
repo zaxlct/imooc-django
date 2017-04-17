@@ -97,7 +97,7 @@ WSGI_APPLICATION = 'imooc.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-# 数据库配置
+# 部署时的数据库配置，请和  docker-compose 里的配置保持一致
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
