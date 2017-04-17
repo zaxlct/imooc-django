@@ -8,24 +8,24 @@
   {% endblock %}
   {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
   <title>{% block title %}{% endblock %}</title>
-  {% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static "xadmin/css/rtl.css" %}{% endblock %}" />{% endif %}
+  {% if LANGUAGE_BIDI %}<link rel="stylesheet" href="{% block stylesheet_rtl %}{% static "xadmin/css/rtl.css" %}{% endblock %}" />{% endif %}
   {% vendor 'bootstrap.css' %}
   {% if site_theme %}
-  <link rel="stylesheet" type="text/css" id="site-theme" href="{{site_theme}}" />
+  <link rel="stylesheet" id="site-theme" href="{{site_theme}}" />
   {% else %}
-  <link rel="stylesheet" type="text/css" href="{% static "xadmin/css/themes/bootstrap-xadmin.css" %}" />
+  <link rel="stylesheet" href="{% static "xadmin/css/themes/bootstrap-xadmin.css" %}" />
   {% endif %}
   {% vendor 'font-awesome.css' 'xadmin.main.css' 'xadmin.plugins.css' 'xadmin.responsive.css' %}
   {{ media.css }}
   {% block extrastyle %}{% endblock %}
   {% vendor 'jquery.js' %}
   {% url 'xadmin:index' as indexurl %}
-  <script type="text/javascript">
+  <script>
     window.__admin_media_prefix__ = "{% filter escapejs %}{% static "xadmin/" %}{% endfilter %}";
     window.__admin_path_prefix__ = "{% filter escapejs %}{{ indexurl }}{% endfilter %}";
     window.__admin_language_code__ = "{{LANGUAGE_CODE}}";
   </script>
-  <script type="text/javascript" src="{% url 'xadmin:jsi18n' %}"></script>
+  <script src="{% url 'xadmin:jsi18n' %}"></script>
   {% block extrahead %}{% endblock %}
   {% view_block 'extrahead' %}
 </head>

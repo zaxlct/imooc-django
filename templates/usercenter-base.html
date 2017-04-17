@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
   <title>{% block title %}个人信息- 慕学在线网{% endblock %}</title>
-  <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'js/plugins/queryCity/css/cityLayout.css' %}">
+  <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+  <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'js/plugins/queryCity/css/cityLayout.css' %}">
 
-  <link rel="stylesheet" type="text/css" href="{% static 'css/lq.datetimepick.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/lq.datetimepick.css' %}"/>
 
   {% block custom_css %}
   {% endblock %}
-  <script src="{% static 'js/jquery.min.js' %}" type="text/javascript"></script>
-  <script src="{% static 'js/jquery-migrate-1.2.1.min.js' %}" type="text/javascript"></script>
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/jquery-migrate-1.2.1.min.js' %}"></script>
 
 </head>
 <body>
@@ -140,22 +140,22 @@
 </section>
 
 <script src="{% static 'js/selectUi.js' %}" type='text/javascript'></script>
-<script type="text/javascript" src="{% static 'js/plugins/laydate/laydate.js' %}"></script>
+<script src="{% static 'js/plugins/laydate/laydate.js' %}"></script>
 <script src="{% static 'js/plugins/layer/layer.js' %}"></script>
-<script src="{% static 'js/plugins/queryCity/js/public.js' %}" type="text/javascript"></script>
-<script src="{% static 'js/unslider.js' %}" type="text/javascript"></script>
-<script src="{% static 'js/plugins/jquery.scrollLoading.js' %}" type="text/javascript"></script>
-<script src="{% static 'js/validateDialog.js' %}" type="text/javascript"></script>
-<script src="{% static 'js/deco-common.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/plugins/queryCity/js/public.js' %}"></script>
+<script src="{% static 'js/unslider.js' %}"></script>
+<script src="{% static 'js/plugins/jquery.scrollLoading.js' %}"></script>
+<script src="{% static 'js/validateDialog.js' %}"></script>
+<script src="{% static 'js/deco-common.js' %}"></script>
 
 <script src='{% static 'js/plugins/jquery.upload.js' %}' type='text/javascript'></script>
-<script src="{% static 'js/validate.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/validate.js' %}"></script>
 <script src="{% static 'js/deco-user.js' %}"></script>
 
 {% block custom_js %}
 {% endblock %}
 
-<script type="text/javascript">
+<script>
   // 课程取消收藏
   $('.jsDeleteFav_course').on('click', function () {
     var _this = $(this),

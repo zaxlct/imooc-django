@@ -6,12 +6,12 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
   <title>{% block custom_title %}机构首页{% endblock %}</title>
-  <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'js/plugins/queryCity/css/cityLayout.css' %}">
-  <script src="{% static 'js/jquery.min.js' %}" type="text/javascript"></script>
-  <script src="{% static 'js/jquery-migrate-1.2.1.min.js' %}" type="text/javascript"></script>
+  <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+  <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'js/plugins/queryCity/css/cityLayout.css' %}">
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/jquery-migrate-1.2.1.min.js' %}"></script>
   {% block custom_css %}{% endblock %}
 
 </head>
@@ -129,10 +129,10 @@
 <script src="{% static 'js/selectUi.js' %}" type='text/javascript'></script>
 <script src="{% static 'js/plugins/laydate/laydate.js' %}"></script>
 <script src="{% static 'js/plugins/layer/layer.js' %}"></script>
-<script src="{% static 'js/plugins/queryCity/js/public.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/plugins/queryCity/js/public.js' %}"></script>
 
-<script src="{% static '' %}js/plugins/jquery.raty.js"></script>
-<script type="text/javascript">
+<script src="{% static 'js/plugins/jquery.raty.js' %}"></script>
+<script>
   //收藏分享
   //收藏分享
   function add_fav(current_elem, fav_id, fav_type) {
@@ -207,7 +207,7 @@
 </script>
 
 
-<script type="text/javascript">
+<script>
   $(function () {
     $('.recordbtn1').click(function () {
       $('.recordbox1').show();

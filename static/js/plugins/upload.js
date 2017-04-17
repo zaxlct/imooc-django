@@ -44,7 +44,7 @@
         if (iframeObj == null) {
 
             var frameName = 'upload_frame_' + (frameCount++);
-            var iframe = $('<iframe style="position:absolute;top:-9999px" ><script type="text/javascript"></script></iframe>').attr('name', frameName);
+            var iframe = $('<iframe style="position:absolute;top:-9999px" ><script></script></iframe>').attr('name', frameName);
             formName = 'form_' + frameName;
             var form = $('<form method="post" style="display:none;" enctype="multipart/form-data" />').attr('name', formName);
             form.attr("target", frameName).attr('action', options.url);

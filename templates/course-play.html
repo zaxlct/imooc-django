@@ -3,13 +3,13 @@
 {% load staticfiles %}
 
 {% block custom_css %}
-  <link rel="stylesheet" type="text/css" href="{%  static 'css/muke/base.css' %}"/>
-  <link rel="stylesheet" type="text/css" href="{%  static 'css/muke/common-less.css' %}"/>
-  <link rel="stylesheet" type="text/css" href="{%  static 'css/muke/course/learn-less.css' %}"/>
-  <link rel="stylesheet" type="text/css" href="{%  static 'css/aui.css' %}"/>
-  <link rel="stylesheet" type="text/css" href="{%  static 'css/mooc.css' %}"/>
-  <link rel="stylesheet" type="text/css" href="{%  static 'css/muke/course/common-less.css' %}">
-  <link rel="stylesheet" type="text/css" href="{%  static 'css/video-js.min.css' %}">
+  <link rel="stylesheet" href="{%  static 'css/muke/base.css' %}"/>
+  <link rel="stylesheet" href="{%  static 'css/muke/common-less.css' %}"/>
+  <link rel="stylesheet" href="{%  static 'css/muke/course/learn-less.css' %}"/>
+  <link rel="stylesheet" href="{%  static 'css/aui.css' %}"/>
+  <link rel="stylesheet" href="{%  static 'css/mooc.css' %}"/>
+  <link rel="stylesheet" href="{%  static 'css/muke/course/common-less.css' %}">
+  <link rel="stylesheet" href="{%  static 'css/video-js.min.css' %}">
   <style>
     .video-js .vjs-big-play-button {
       top: 50%;
@@ -19,7 +19,7 @@
 {% endblock %}
 
 {% block custom_js %}
-<script src="{% static 'js/video.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/video.min.js' %}"></script>
 {% endblock %}
 
 {% block custom_bread %}
