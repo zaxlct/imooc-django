@@ -6,6 +6,10 @@ DEBUG = True
 INTERNAL_IPS = ['127.0.0.1']
 ALLOWED_HOSTS += INTERNAL_IPS
 ALLOWED_HOSTS.append('localhost')
+
+# 重置 setting 里的 STATIC_ROOT 配置
+STATIC_ROOT = ''
+
 INSTALLED_APPS.append('debug_toolbar')
 MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
 

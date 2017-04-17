@@ -15,16 +15,12 @@ Including another URLconf
 """
 from django.conf import settings
 from django.conf.urls import url, include
-# from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views.static import serve #处理静态文件
 
-# from django.views.static import serve #处理静态文件
 from imooc.settings import MEDIA_ROOT
 
-# 项目部署上线时使用
-# from imooc.settings import STATIC_ROOT
-
+# from django.contrib import admin
 import xadmin
 
 # from users.views import user_login
@@ -64,7 +60,6 @@ urlpatterns = [
     # 重置密码表单 POST 请求
     url(r'^modify_pwd/$', ModifyPwdView.as_view(), name='modify_pwd'),
 
-
     #课程机构相关 URL
     url(r'^org/', include('organization.urls', namespace='org')),
 
@@ -73,15 +68,19 @@ urlpatterns = [
 
     # 用户中心 URL 配置
     url(r'^users/', include('users.urls', namespace='users')),
-
-    #配置 404，500 页面的静态文件访问处理（ 项目部署上线时使用）
-    # url(r'^static/(?P<path>.*)$', serve, {'document_root': STATIC_ROOT}),
 ]
 
 # 全局 404 页面配置（django 会自动调用这个变量）
 handler404 = 'users.views.page_not_found'
 handler500 = 'users.views.page_error'
 
+
 if settings.DEBUG:
+    # debug_toolbar 插件配置
     import debug_toolbar
     urlpatterns.append(url(r'^__debug__/', include(debug_toolbar.urls)))
+else:
+    # 项目部署上线时使用
+    from imooc.settings import STATIC_ROOT
+    # 配置静态文件访问处理
+    urlpatterns.append(url(r'^static/(?P<path>.*)$', serve, {'document_root': STATIC_ROOT}))
