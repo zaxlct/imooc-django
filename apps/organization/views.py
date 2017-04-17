@@ -101,6 +101,7 @@ class OrgHomeView(View):
             'course_org': course_org,
             'current_page': current_page,
             'has_fav': has_fav,
+            'org_id': org_id,
         })
 
 
@@ -117,8 +118,18 @@ class OrgCourseView(View):
             if UserFavorite.objects.filter(user=request.user, fav_id = course_org.id, fav_type=2):
                 has_fav = True
 
+        # 分页
+        try:
+            page = request.GET.get('page', 1)
+        except PageNotAnInteger:
+            page = 1
+
+        p = Paginator(all_courses, 2, request=request)
+
+        courses = p.page(page)
+
         return render(request, 'org-detail-course.html', {
-            'all_courses': all_courses,
+            'all_courses': courses,
             'course_org': course_org,
             'current_page': current_page,
             'has_fav': has_fav,

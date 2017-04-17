@@ -12,13 +12,13 @@
       {% for teacher in all_teachers %}
       <dl class="des users">
         <dt>
-          <a href="">
+          <a href="{% url 'org:teacher_detail' teacher.id %}">
             <img width="100" height="100" class="scrollLoading" data-url="{{ MEDIA_URL }}{{ teacher.image }}" src="{{ MEDIA_URL }}{{ teacher.image }}" />
           </a>
         </dt>
         <dd>
           <h1>
-            <a href="">{{ teacher.name }}<span class="key">已认证</span></a>
+            <a href="{% url 'org:teacher_detail' teacher.id %}">{{ teacher.name }}<span class="key">已认证</span></a>
           </h1>
           <ul class="cont clearfix">
             <li class="time">工作年限：<span>{{ teacher.work_years }}年</span></li>

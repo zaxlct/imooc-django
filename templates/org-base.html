@@ -27,24 +27,29 @@
           {% if request.user.is_authenticated %}
             <div class="personal">
               <dl class="user fr">
-                <dd>bobby<img class="down fr" src="/static/images/top_down.png"/></dd>
-                <dt><img width="20" height="20" src="/static/media/image/2016/12/default_big_14.png"/></dt>
+                <dd>{{ request.user.nick_name }}<img class="down fr" src="{% static 'images/top_down.png' %}"/></dd>
+                <dt><img width="20" height="20" src="{{ MEDIA_URL }}{{ request.user.image }}"/></dt>
               </dl>
               <div class="userdetail">
                 <dl>
-                  <dt><img width="80" height="80" src="/static/media/image/2016/12/default_big_14.png"/></dt>
+                  <dt><img width="80" height="80" src="{{ MEDIA_URL }}{{ request.user.image }}" /></dt>
                   <dd>
-                    <h2>django</h2>
-                    <p>bobby</p>
+                    <h2>{{ request.user.nick_name }}</h2>
+                    <p>{{ request.user.username }}</p>
                   </dd>
                 </dl>
                 <div class="btn">
-                  <a class="personcenter fl" href="usercenter-info.html">进入个人中心</a>
-                  <a class="fr" href="/logout/">退出</a>
+                  <a class="personcenter fl" href="{% url 'users:user_info' %}">进入个人中心</a>
+                  <a class="fr" href="{% url 'logout' %}">退出</a>
                 </div>
               </div>
             </div>
-            {% else %}
+            <a href="">
+              <div class="msg-num">
+                <span id="MsgNum">{{ request.user.unread_nums }}</span>
+              </div>
+            </a>
+          {% else %}
             <a style="color:white" class="fr registerbtn" href="{% url 'register' %}">注册</a>
             <a style="color:white" class="fr loginbtn" href="{% url 'login' %}">登录</a>
           {% endif %}
@@ -194,30 +199,6 @@
         <h1>机构介绍</h1>
         <a class="green fr more" href="org-detail-desc.html">查看更多 > </a>
       </div>
-      <div class="cont">&nbsp; &nbsp; <p>&nbsp; &nbsp;</p>
-        <h1 class="ue_t" label="Title center" name="tc"
-            style="border-bottom-color:#cccccc;border-bottom-width:2px;border-bottom-style:solid;padding:0px 4px 0px 0px;text-align:center;margin:0px 0px 20px;">
-          <span style="color:#c0504d;">[键入文档标题]</span></h1>
-        <p style="text-align:center;"><strong class="ue_t">[键入文档副标题]</strong></p>
-        <h3><span class="ue_t" style="font-family:幼圆">[标题 1]</span></h3>
-        <p class="ue_t" style="text-indent:2em;">对于“插入”选项卡上的库，在设计时都充分考虑了其中的项与文档整体外观的协调性。
-          您可以使用这些库来插入表格、页眉、页脚、列表、封面以及其他文档构建基块。 您创建的图片、图表或关系图也将与当前的文档外观协调一致。</p>
-        <p class="ue_t" style="text-indent:2em;"><img
-          src="media/courses/ueditor/57aa86a0000145c512000460_20161210234050_865.jpg" title=""
-          alt="57aa86a0000145c512000460.jpg"/></p>
-        <h3><span class="ue_t" style="font-family:幼圆">[标题 2]</span></h3>
-        <p><img
-          src="http://api.map.baidu.com/staticimage?center=116.410899,39.863624&zoom=11&width=530&height=340&markers=116.404,39.915"
-          width="530" height="340"/></p>
-        <p class="ue_t" style="text-indent:2em;">在“开始”选项卡上，通过从快速样式库中为所选文本选择一种外观，您可以方便地更改文档中所选文本的格式。
-          您还可以使用“开始”选项卡上的其他控件来直接设置文本格式。大多数控件都允许您选择是使用当前主题外观，还是使用某种直接指定的格式。</p>
-        <h3><span class="ue_t" style="font-family:幼圆">[标题 3]</span></h3>
-        <p>2016-12-10</p>
-        <p class="ue_t">对于“插入”选项卡上的库，在设计时都充分考虑了其中的项与文档整体外观的协调性。 您可以使用这些库来插入表格、页眉、页脚、列表、封面以及其他文档构建基块。
-          您创建的图片、图表或关系图也将与当前的文档外观协调一致。</p>
-        <p class="ue_t"><br/></p>
-        <p><br/></p>
-        <p><br/></p><a href="/company/desc/22/"><span class="green">[查看更多]</span></a></div>
     </div>
     {% endblock %}
 
