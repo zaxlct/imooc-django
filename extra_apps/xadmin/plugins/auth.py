@@ -18,6 +18,9 @@ from xadmin.sites import site
 from xadmin.util import unquote
 from xadmin.views import BaseAdminPlugin, ModelFormAdminView, ModelAdminView, CommAdminView, csrf_protect_m
 
+from django.contrib.auth import get_user_model
+User = get_user_model()
+
 
 ACTION_NAME = {
     'add': _('Can add %s'),
