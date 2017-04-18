@@ -1,7 +1,7 @@
 import xadmin
 from xadmin import views
-
-from .models import EmailVerifyRecord, Banner
+from xadmin.plugins.auth import UserAdmin
+from .models import EmailVerifyRecord, Banner, UserProfile
 
 
 ### adminx 全局配置
@@ -26,6 +26,20 @@ class BannerAdmin():
     list_display = ['title', 'image', 'url', 'index', 'add_time']
     search_fields = ['title', 'image', 'url', 'index']
     list_filter = ['title', 'image', 'url', 'index', 'add_time']
+
+
+class UserProfileAdmin(UserAdmin):
+    pass
+
+
+# 卸载 django 自带的 auth_user
+from django.contrib.auth.models import User
+xadmin.site.unregister(User)
+
+
+# 继承自定义的 UserProfile 覆盖 django 自带的 auth_user
+xadmin.site.register(UserProfile, UserProfileAdmin)
+
 
 xadmin.site.register(EmailVerifyRecord, EmailVerifyRecordAdmin)
 xadmin.site.register(Banner, BannerAdmin)
