@@ -34,4 +34,4 @@ master 分支里，我用 `users/models.py` 里的 `UserProfile` 重写了自带
 [点击查看解决办法](http://www.cnblogs.com/vincenshen/articles/6528344.html)
 
 
-**注意： 这个仓库里的 xadmin 源码我已经修改过了，所以如果你的项目也是用 `users/models.py` 里的 `UserProfile` 重写了自带的 `auth_user` 表，那么无须改动代码。**
+**注意： 这两个 BUG 我也已经修改过了，所以如果你的项目也是用 `users/models.py` 里的 `UserProfile` 重写了自带的 `auth_user` 表，那么无须改动代码。**
