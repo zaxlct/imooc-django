@@ -27,7 +27,7 @@ make dev
  
 - 配置数据库
  1. 确保你已经安装了 MySQL
- 2. `setting.py`里的 `DATABASES` 填入你的本地的数据库信息
+ 2. `settingsdev.py`里的 `DATABASES` 填入你的本地的数据库信息（开发环境），`settings.py` 里填入你服务器的数据库信息（部署环境）。
  ```python
  # 这是我本机的数据库信息，仅提供参考
  DATABASES = {
@@ -50,13 +50,16 @@ make migrate
  
 - 配置 PyCharm 项目环境变量
 
-    1. 第一步
+    1. 第一步：点击 Edit Config
+
     ![点击 Edit Config](http://ww4.sinaimg.cn/large/006tKfTcly1ferrn4bio1j30go04cdge.jpg)
 
-    2. 第二步
+    2. 第二步：点击 环境变量配置
+
     ![点击 环境变量配置](http://ww2.sinaimg.cn/large/006tNbRwly1ferrozrvchj313q03m3zk.jpg)
 
-    3. 第三步
+    3. 第三步：输入环境变量
+
     ![输入环境变量](http://ww3.sinaimg.cn/large/006tNbRwly1ferrpwx0kgj30kc044aal.jpg)
 ```
 Name:   DJANGO_SETTINGS_MODULE
