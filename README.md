@@ -12,7 +12,8 @@
 - Django 1.10.5
 - xadmin 0.6
 
-### [Linux/Mac/Windos 用 Docker 部署项目步骤](https://github.com/zaxlct/MxOnline_Django/blob/master/Deployment.md)
+### 如何部署项目
+ [Linux/Mac/Windos 用 Docker 部署项目步骤](https://github.com/zaxlct/MxOnline_Django/blob/master/Deployment.md)
 
 
 ### 如何启动项目
