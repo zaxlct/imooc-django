@@ -1,0 +1,14 @@
+Desktop.ini
+._*
+Thumbs.db
+.Spotlight-V100
+.Trashes
+*.pyc
+*.out
+venv
+node_modules
+.sass-cache
+.log
+.DS_Store
+.idea
+data
