@@ -113,7 +113,7 @@ chkconfig docker on
 ### 2.Dcoker-compose安装
 ```bash
 yum install -y python-pip
-pip install -U docker-compose
+pip install -U daocloud
 docker-compose -v
 ```
 
@@ -129,14 +129,14 @@ git clone https://github.com/zaxlct/MxOnline_Django.git
 ### 4.启动docker-compose
 ```bash
 cd MxOnline_Django/
-docker-compose up -d
+daocloud up -d
 ```
 
 
 ### 5.同步数据库
 ```
-docker-compose exec kele_imooc /usr/local/bin/python manage.py makemigrations
-docker-compose exec kele_imooc /usr/local/bin/python manage.py migrate
+daocloud exec kele_imooc /usr/local/bin/python manage.py makemigrations
+daocloud exec kele_imooc /usr/local/bin/python manage.py migrate
 ```
 
 
