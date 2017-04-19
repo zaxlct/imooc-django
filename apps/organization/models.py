@@ -25,7 +25,7 @@ class CourseOrg(models.Model):
     tag = models.CharField(default=u'全国知名', max_length=10, verbose_name=u'机构标签')
     click_nums = models.IntegerField(default=0, verbose_name='点击数')
     fav_nums = models.IntegerField(default=0, verbose_name='收藏数')
-    image = models.ImageField(upload_to='org/%Y/%m', verbose_name='封面图')
+    image = models.ImageField(default='', upload_to='org/%Y/%m', verbose_name='封面图', max_length=100)
     address = models.CharField(max_length=150, verbose_name='机构地址')
     city = models.ForeignKey(CityDict, verbose_name='所在城市')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
