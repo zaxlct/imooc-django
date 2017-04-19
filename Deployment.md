@@ -1,4 +1,4 @@
-# Linux/Mac/Windos 用 Docker 部署该项目步骤
+# Linux/Mac/Windos 用 Docker 部署项目步骤
 
 ### 1.Docker安装
 Linux(CenOS 7)：
@@ -54,6 +54,6 @@ docker-compose exec kele_imooc /usr/local/bin/python manage.py migrate
 
 ### 6.最后还需要导入你的数据
 
+---
 
-### 最后
 当然你本地也可以用 Docker 作为开发环境，这个时候应使用应修改 `manage.py`, 使用 `settingsdev.py` 而不是 `settings.py`。

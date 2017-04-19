@@ -1,6 +1,6 @@
 # IMOOC
 - 仿照[慕课网](http://www.imooc.com/)搭建的在线编程学习平台
-- **master 分支是 python 3 环境，其余的所有分支均为 Python 2.7**
+- **master 分支是 python 3.5 环境，其余的所有分支均为 python 2.7**
 - 下面所有的配置只针对 master 分支，其余的分支都是按照课程章节划分的，请按照需求选择分支
 - [支持 python 3.5 的 xadmin 安装下载](https://github.com/zaxlct/MxOnline_Django/tree/xadmin-python3)
 - [Django + Vue 单页面应用的开发环境搭建步骤](http://www.jianshu.com/p/fe74907e16b9)
@@ -11,6 +11,8 @@
 - Python 3.5
 - Django 1.10.5
 - xadmin 0.6
+
+### [Linux/Mac/Windos 用 Docker 部署项目步骤](https://github.com/zaxlct/MxOnline_Django/blob/master/Deployment.md)
 
 
 ### 如何启动项目
@@ -75,12 +77,10 @@ make run
  
  
 ### `settingsdev.py` 有什么用？
-项目上线时 `settings.py` 必须设置 `DEBUG=False`,当 `DEBUG=FALSE`时，Django 不会用自带的 server 去加载 js/css 等静态文件，需要用 nginx 之类的去做静态文件的 server。    
+项目上线时 `settings.py` 必须设置 `DEBUG=False`，这时 Django 不会用自带的 server 去加载 js/css/img 等静态文件，需要用 nginx 之类的去做静态文件的 server。    
+为了避免来回的修改 `setting.py`，项目开发时的配置在 `settingsdev.py` 里，项目部署上线时的配置在 `settings.py` 里。不要随意修改 `setting.py`。
 
-而且 ALLOWED_HOSTS 需要配置本地 IP。这些只有在开发项目时才用到的配置可以放到 `settingsdev.py` 里。
-另外项目开发阶段还可以安装辅助插件（比如`django-debug-toolbar`）也能配置到 `settingsdev.py` 里。
-
-** 注意：PyCharm 默认 `settings.py` 为配置文件，所以需要更改一下项目环境变量配置，开发时以  `settingsdev.py` 为准。 **
+** 注意：PyCharm 默认 `settings.py` 为配置文件，所以才需要配置 PyCharm 项目环境变量 **
 
 
 ### Django 操作 MySql 配置
@@ -101,44 +101,5 @@ pymysql.install_as_MySQLdb()
 In Django 1.10 `django.core.context_processors` has been moved to `django.template.context_processors`
 
 
-## Docker-compose部署(CentOS 7)
-
-### 1.Docker安装
-```bash
-yum install -y docker
-systemctl start docker
-chkconfig docker on
-```
-
-
-### 2.Dcoker-compose安装
-```bash
-yum install -y python-pip
-pip install -U docker-compose
-docker-compose -v
-```
-
-
-### 3.Dowload
-```bash
-git clone https://github.com/zaxlct/MxOnline_Django.git
-```
-1. 修改conf/nginx/mx_nginx.conf中的IP或者域名
-2. 修改sesttings中数据库配置HOST为mysql
-
-
-### 4.启动docker-compose
-```bash
-cd MxOnline_Django/
-docker-compose up -d
-```
-
-
-### 5.同步数据库
-```
-docker-compose exec kele_imooc /usr/local/bin/python manage.py makemigrations
-docker-compose exec kele_imooc /usr/local/bin/python manage.py migrate
-```
-
-
-### 6.最后还需要导入你的数据
+### xadmin 不支持 Django 1.11
+django 1.11 `Lib\site-packages\django\forms\widgets.py` 中已经没有了 `RadioFieldRenderer` 这个类，故 [xadmin-python3](https://github.com/zaxlct/MxOnline_Django/tree/xadmin-python3) 分支只支持到 django 1.10
