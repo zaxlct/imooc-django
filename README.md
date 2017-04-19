@@ -35,3 +35,7 @@ master 分支里，我用 `users/models.py` 里的 `UserProfile` 重写了自带
 
 
 **注意： 这两个 BUG 我也已经修改过了，所以如果你的项目也是用 `users/models.py` 里的 `UserProfile` 重写了自带的 `auth_user` 表，那么无须改动代码。**
+
+
+### xadmin 不支持 Django 1.11
+django 1.11 `Lib\site-packages\django\forms\widgets.py` 中已经没有了 `RadioFieldRenderer` 这个类，故 [xadmin-python3](https://github.com/zaxlct/MxOnline_Django/tree/xadmin-python3) 分支只支持到 django 1.10
