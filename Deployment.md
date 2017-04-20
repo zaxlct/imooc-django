@@ -39,7 +39,7 @@ docker-compose -v
 
 
 ### 3.修改配置文件
-1. 修改 `conf/nginx/mx_nginx.conf` 中的 IP 和域名，默认都是 `127.0.0.1`
+1. 修改 `conf/nginx/mx_nginx.conf` 中的 IP 和域名，默认都是 `127.0.0.1`，IP 和域名请改成你自己服务器的 IP 和 自己的域名。
 2. `settings.py` 中 `DATABASES` 配置要和 `docker-compose.yml`里的数据库配置保持一致（可以不做修改使用默认值），其中 HOST 为 `mysql`。
 
 
