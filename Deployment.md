@@ -1,4 +1,5 @@
 # Linux/Mac/Windos 用 Docker 部署项目步骤
+目前注册腾讯云可以免费领取一个月的服务器使用权限，亲测以下教程在腾讯云部署成功。
 
 ### 1.Docker安装
 Linux(CenOS 7)：
@@ -32,6 +33,7 @@ pip install -U docker-compose
 # Win/ Mac 用户从这里开始执行
 git clone https://github.com/zaxlct/MxOnline_Django.git
 cd MxOnline_Django
+# 查看 docker-compose 是否已安装
 docker-compose -v
 ```
 
