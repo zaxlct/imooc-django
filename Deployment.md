@@ -21,6 +21,8 @@ Mac系统的安装文件目录：http://mirrors.aliyun.com/docker-toolbox/mac/do
 - 10.10.3以上推荐使用 Docker for Mac
 Mac系统的安装文件目录：http://mirrors.aliyun.com/docker-toolbox/mac/docker-for-mac/
 
+[镜像加速方法](https://www.daocloud.io/mirror#accelerator-doc)
+
 
 ### 2.Dcoker-compose安装
 ```bash
