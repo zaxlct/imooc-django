@@ -49,10 +49,11 @@ docker-compose up -d
 ```
 
 
-### 5.同步数据库
+### 5.同步数据库 and 创建超级用户
 ```
 docker-compose exec kele_imooc /usr/local/bin/python manage.py makemigrations
 docker-compose exec kele_imooc /usr/local/bin/python manage.py migrate
+docker-compose exec kele_imooc /usr/local/bin/python manage.py createsuperuser
 ```
 如果浏览器打开 `127.0.0.1` 或者打开你自己配置的域名 or IP，就能预览项目了。
 
