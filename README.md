@@ -12,6 +12,9 @@
 - Django 1.10.5
 - xadmin 0.6
 
+### 网站功能
+![网站功能脑图](http://ww4.sinaimg.cn/large/006tNbRwly1fetfjhp2xvj318b0qk441.jpg)
+
 ### 如何部署项目
  [Linux/Mac/Windos 用 Docker 部署项目步骤](https://github.com/zaxlct/MxOnline_Django/blob/master/Deployment.md)
 
