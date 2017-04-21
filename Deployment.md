@@ -48,23 +48,24 @@ docker-compose -v
 docker-compose up -d
 ```
 
-
-### 5.同步数据库 and 创建超级用户
+### 5.同步数据库
 ```bash
 docker-compose exec kele_imooc /usr/local/bin/python manage.py makemigrations
 docker-compose exec kele_imooc /usr/local/bin/python manage.py migrate
-docker-compose exec kele_imooc /usr/local/bin/python manage.py createsuperuser
 ```
-如果浏览器打开 `127.0.0.1` 或者打开你自己配置的域名 or IP，就能预览项目了。
 
-### 6.最后还需要导入你的数据
-
-### xadmin 没有样式解决办法
-重新收集一下样式
+### 6.收集样式
 ```bash
 docker-compose exec kele_imooc /usr/local/bin/python manage.py collectstatic
 ```
 
----
+如果浏览器打开 `127.0.0.1` 或者打开你自己配置的域名 or IP，就能预览项目了。
 
-当然你本地也可以用 Docker 作为开发环境，这个时候应使用应修改 `manage.py`, 使用 `settingsdev.py` 而不是 `settings.py`。
+### 7.最后
+- 你可以手动导入你自己的数据到数据库
+- 你也可以用 Docker 作为本地的开发环境，这个时候应使用应修改 `manage.py`, 使用 `settingsdev.py` 而不是 `settings.py`
+- 登录 admin 后台时前，别忘了先创建超级用户
+```bash
+docker-compose exec kele_imooc /usr/local/bin/python manage.py createsuperuser
+```
+
