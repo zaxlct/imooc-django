@@ -4,3 +4,6 @@ venv
 db.sqlite3
 *.zip
 data
+*.pyc
+static/admin
+static/xadmin
