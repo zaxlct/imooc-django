@@ -4,7 +4,7 @@
 - **master 分支是 python 3.5 环境，其余的所有分支均为 python 2.7**
 - 下面所有的配置只针对 master 分支，其余的分支都是按照课程章节划分的，请按照需求选择分支
 - [支持 python 3.5 的 xadmin 安装下载方法](https://github.com/zaxlct/MxOnline_Django/tree/xadmin-python3)
-- [Django + Vue 单页面应用的开发环境搭建步骤](https://github.com/zaxlct/hello-vue-django)
+- [Django + Vue 单页面应用的开发环境搭建步骤](http://www.jianshu.com/p/fe74907e16b9)
 - [Django 使用 QQ邮箱 / 新浪邮箱发送邮件配置](http://www.jianshu.com/p/5c30ff053381)
 - **如果你在开发的过程中遇到问题，可以在 [Issues](https://github.com/zaxlct/MxOnline_Django/issues) 里提问，我看到了会回复**
 - 如果该项目对您有帮助，欢迎 star 🤗
