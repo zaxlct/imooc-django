@@ -1,7 +1,7 @@
 FROM python:3.5
 ENV PYTHONUNBUFFERED 1
 
-MAINTAINER WJ <717728534@qq.com>
+MAINTAINER WJ <zaxlct@foxmail.com>
 
 ADD ./requirements.txt /tmp/requirements.txt
 
