@@ -32,6 +32,7 @@ class CourseAdmin:
     #Inline # 添加课程的时候可以顺便添加章节、课程资源
     inlines = [LessonInline, CourseResourceInline]
 
+    #重新在这里写一遍的原因是，避免数据重复
     def queryset(self):
         qs = super(CourseAdmin, self).queryset()
         qs = qs.filter(is_banner=False)
@@ -54,6 +55,7 @@ class BannerCourseAdmin(object):
     #Inline # 添加课程的时候可以顺便添加章节、课程资源
     inlines = [LessonInline, CourseResourceInline]
 
+    #把轮播图从 User model 里转移到 Course model 里
     def queryset(self):
         qs = super(BannerCourseAdmin, self).queryset()
         qs = qs.filter(is_banner=True)
