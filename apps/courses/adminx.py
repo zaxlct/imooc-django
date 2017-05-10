@@ -2,7 +2,7 @@ __author__ = 'zaxlct'
 __date__ = '2017/4/2 下午5:08'
 
 import xadmin
-from .models import Course, Lesson, Video, CourseResource
+from .models import Course, Lesson, Video, CourseResource, BannerCourse
 
 # 添加课程的时候可以顺便添加章节
 class LessonInline:
@@ -38,6 +38,28 @@ class CourseAdmin:
         return qs
 
 
+class BannerCourseAdmin(object):
+    list_display = ['name', 'desc', 'detail', 'degree', 'learn_times', 'students', 'fav_nums',
+                    'click_nums', 'add_time']
+    search_fields = ['name', 'desc', 'detail', 'degree', 'learn_times', 'students', 'fav_nums',
+                    'click_nums']
+    list_filter = ['name', 'desc', 'detail', 'degree', 'learn_times', 'students', 'fav_nums',
+                    'click_nums', 'add_time']
+    ordering = ['-click_nums']
+
+    # readonly_fields 和 exclude 的字段不要重复，否则会冲突
+    readonly_fields = ['click_nums']
+    exclude = ['fav_nums']
+
+    #Inline # 添加课程的时候可以顺便添加章节、课程资源
+    inlines = [LessonInline, CourseResourceInline]
+
+    def queryset(self):
+        qs = super(BannerCourseAdmin, self).queryset()
+        qs = qs.filter(is_banner=True)
+        return qs
+
+
 class LessonAdmin:
     list_display = ['course', 'name', 'add_time']
     search_fields = ['course', 'name']
@@ -58,6 +80,7 @@ class CourseResourceAdmin:
 
 
 xadmin.site.register(Course, CourseAdmin)
+xadmin.site.register(BannerCourse, BannerCourseAdmin)
 xadmin.site.register(Lesson, LessonAdmin)
 xadmin.site.register(Video, VideoAdmin)
 xadmin.site.register(CourseResource, CourseResourceAdmin)
