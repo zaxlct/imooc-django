@@ -17,11 +17,26 @@
 ### 网站功能
 ![网站功能脑图](http://ww4.sinaimg.cn/large/006tNbRwly1fetfjhp2xvj318b0qk441.jpg)
 
+### 快速启动该项目
+1. 安装 mysql 
+2. 安装 python3
+3. 建立虚拟环境（可选步骤）
+```bash
+git clone https://github.com/zaxlct/MxOnline_Django
+cd MxOnline_Django
+make dev
+# 建立一个名为 imooc 数据库
+make migrate
+make run
+```
+因为此时数据库为空，所以页面看起来没什么东西
+
+
 ### 如何部署项目
  [Linux/Mac/Windos 用 Docker 部署项目步骤](https://github.com/zaxlct/MxOnline_Django/blob/master/Deployment.md)
 
 
-### 如何启动项目
+### 启动项目详细步骤
 - 克隆项目
 ```bash
 git clone https://github.com/zaxlct/MxOnline_Django
