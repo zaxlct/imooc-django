@@ -7,7 +7,6 @@
 - [Django + Vue 单页面应用的开发环境搭建步骤](http://www.jianshu.com/p/fe74907e16b9)
 - [Django 使用 QQ邮箱 / 新浪邮箱发送邮件配置](http://www.jianshu.com/p/5c30ff053381)
 - **QQ 交流群 163801325，有问题的话请加群，都是大神~**
-- 如果该项目对您有帮助，欢迎 star 🤗
 
 ### 环境
 - Python 3.5
