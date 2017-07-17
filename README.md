@@ -28,14 +28,14 @@ make dev
 make migrate
 make run
 ```
-因为此时数据库为空，所以页面看起来没什么东西
+因为此时数据库为空，所以页面看起来没什么东西，需要手动往数据库里加数据，或者登陆 admin ，添加数据。
 
 
-### 如何部署项目
+### 使用 docker 快速部署/开发项目
  [Linux/Mac/Windos 用 Docker 部署项目步骤](https://github.com/zaxlct/MxOnline_Django/blob/master/Deployment.md)
 
 
-### 启动项目详细步骤
+### Pycharm 启动项目详细步骤
 - 克隆项目
 ```bash
 git clone https://github.com/zaxlct/MxOnline_Django
