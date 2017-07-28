@@ -5,7 +5,7 @@
 - [支持 python 3.5 的 xadmin 安装下载方法](https://github.com/zaxlct/MxOnline_Django/tree/xadmin-python3)
 - [Django + Vue 单页面应用的开发环境搭建步骤](http://www.jianshu.com/p/fe74907e16b9)
 - [Django 使用 QQ邮箱 / 新浪邮箱发送邮件配置](http://www.jianshu.com/p/5c30ff053381)
-- QQ 交流群 163801325，有问题的话请加群
+- QQ 交流群 163801325（更多的是聊天，斗图，可能无法解决你遇到的开发问题，但是能给你带来快乐！）
 
 ### 环境
 - Python 3.5
