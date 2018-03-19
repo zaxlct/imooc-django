@@ -1,7 +1,7 @@
 # IMOOC
 
 - 仿照[慕课网](http://www.imooc.com/)搭建的在线编程学习平台
-- windows 用户可以参考此文章：[《强力Django+杀手级Xadmin打造在线教育平台 - 系列完整版》](http://blog.mtianyan.cn/post/8b4c6c13.html)
+- 每一个章节的详细笔记：[《强力Django+杀手级Xadmin打造在线教育平台 - 系列完整版》](http://blog.mtianyan.cn/post/8b4c6c13.html)
 - 下面所有的配置只针对 master 分支，master 分支是 python 3.5 环境，其余的所有分支均为 python 2.7
 - [支持 python 3.5 的 xadmin 安装下载方法](https://github.com/zaxlct/MxOnline_Django/tree/xadmin-python3)
 - [Django + Vue 单页面应用的开发环境搭建步骤](http://www.jianshu.com/p/fe74907e16b9)
