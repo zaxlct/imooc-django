@@ -8,7 +8,7 @@
 - [Django 使用 QQ邮箱 / 新浪邮箱发送邮件配置](http://www.jianshu.com/p/5c30ff053381)
 - [SQL 文件](https://github.com/zaxlct/imooc-django/blob/master/imooc.sql)
 - [基于flask框架开发的微信小程序后端，用于构建小程序商城](https://github.com/bodanli159951/mini-shop-server)
-- QQ 交流群 163801325（聊天，斗图，学习，交流。伸手党勿进）
+- QQ 交流群<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=41f1578a4eb3fa65bd42bcd879ab5305fbf672ae0af7f5046b4d218416f625f9"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="葬爱代码家族群" title="葬爱代码家族群"></a>（聊天，斗图，学习，交流。伸手党勿进）
 
 ### 环境
 - Python 3.5
