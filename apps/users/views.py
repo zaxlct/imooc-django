@@ -94,8 +94,10 @@ class RegisterView(View):
         register_form = RegisterForm(request.POST)
         if register_form.is_valid():
             email = request.POST.get('email', '')
-            if UserProfile.objects.filter(email=email):
-                return render(request, 'register.html', {'register_form': register_form, 'msg': '用户已经存在！'})
+            if UserProfile.objects.filter(email=email).exists():
+                return render(
+                    request, 'register.html', {'register_form': register_form, 'msg': '用户已经存在！'}
+                )
             password = request.POST.get('password', '')
 
             user_profile = UserProfile()
@@ -122,7 +124,7 @@ class ActiveUserView(View):
     def get(self, request, active_code):
         # 为什么用 filter ？ 因为用户可能注册了好多次，一个 email 对应了好多个 code
         all_records = EmailVerifyRecord.objects.filter(code=active_code)
-        if all_records:
+        if all_records.exists():
             for records in all_records:
                 email = records.email
                 user = UserProfile.objects.get(email=email)
@@ -152,7 +154,7 @@ class ResetView(View):
     def get(self, request, active_code):
         # 如果第二次进来，链接就失效
         all_records = EmailVerifyRecord.objects.filter(code=active_code)
-        if all_records:
+        if all_records.exists():
             for records in all_records:
                 email = records.email
                 return render(request, 'password_reset.html', {'email': email})
@@ -249,7 +251,7 @@ class SendEmailCodeView(LoginRequiredMixin, View):
         email = request.GET.get('email', '')
 
         res = dict()
-        if UserProfile.objects.filter(email=email):
+        if UserProfile.objects.filter(email=email).exists():
             res['email'] = '邮箱已注册'
             return HttpResponse(json.dumps(res), content_type='application/json')
         send_register_email(email, 'update_email')
@@ -266,7 +268,7 @@ class UpdateEmailView(LoginRequiredMixin, View):
 
         existed_records = EmailVerifyRecord.objects.filter(email=email, code=code, send_type='update_email')
         res = dict()
-        if existed_records:
+        if existed_records.exists():
             user = request.user
             user.email = email
             user.save()

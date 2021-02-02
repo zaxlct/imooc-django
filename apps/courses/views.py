@@ -73,7 +73,9 @@ class CourseDetailView(View):
         if request.user.is_authenticated():
             if UserFavorite.objects.filter(user=request.user, fav_id=course.id, fav_type=1):
                 has_fav_course = True
-            if UserFavorite.objects.filter(user=request.user, fav_id=course.course_org.id, fav_type=2):
+            if UserFavorite.objects.filter(
+                user=request.user, fav_id=course.course_org_id, fav_type=2
+            ):
                 has_fav_org = True
 
         return render(request, 'course-detail.html', {
