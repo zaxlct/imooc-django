@@ -2,7 +2,7 @@ Django==1.11.28
 django-crispy-forms==1.6.1
 django-formtools==2.0
 httplib2==0.10.3
-Pillow==6.2.0
+Pillow==8.2.0
 PyMySQL==0.7.10
 django-simple-captcha==0.4.6
 django-pure-pagination
